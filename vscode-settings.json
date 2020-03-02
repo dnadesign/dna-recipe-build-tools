@@ -1,0 +1,31 @@
+{
+  "[javascript]": {
+    "editor.formatOnSave": true
+  },
+  "[php]": {
+    "editor.defaultFormatter": "valeryanm.vscode-phpsab",
+    "editor.formatOnSave": true
+  },
+  "[scss]": {
+    "editor.formatOnSave": true
+  },
+  "css.validate": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
+  },
+  "eslint.enable": true,
+  "eslint.packageManager": "yarn",
+  "javascript.format.enable": false,
+  "less.validate": false,
+  "namespaceResolver.showMessageOnStatusBar": true,
+  "namespaceResolver.sortAlphabetically": true,
+  "php-docblocker.useShortNames": true,
+  "php.suggest.basic": false,
+  "php.validate.enable": false,
+  "phpsab.snifferMode": "onType",
+  "phpsab.standard": "PSR2",
+  "scss.validate": false,
+  "stylelint.enable": true,
+  "stylelint.packageManager": "yarn"
+}

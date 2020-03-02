@@ -1,0 +1,48 @@
+/*
+* Hide only visually, but have it available for screen readers:
+* https://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+*
+* 1. For long content, line feeds are not interpreted as spaces and small width
+*    causes content to wrap 1 word per line:
+*    https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
+*/
+
+@mixin sr-only {
+  position: absolute;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+  clip: rect(0, 0, 0, 0);
+  /* 1 */
+}
+
+/*
+* Extends the .sr-only class to allow the element
+* to be focusable when navigated to via the keyboard:
+* https://www.drupal.org/node/897638
+*/
+
+@mixin sr-only-focusable {
+  &:active,
+  &:focus {
+    position: static;
+    margin: 0;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    white-space: inherit;
+    clip: auto;
+  }
+}
+
+.sr-only {
+  @include sr-only();
+}
+
+.sr-only--focusable {
+  @include sr-only-focusable();
+}

@@ -1,0 +1,14 @@
+.env
+*.map
+hot
+/.solr
+/.vscode
+/fulltextsearch-localsolr
+/node_modules
+/public/_resources
+/public/assets
+/silverstripe-cache
+/themes/**/dist
+/vendor/
+mix-manifest.json
+yarn-error.log

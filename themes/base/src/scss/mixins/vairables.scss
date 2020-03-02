@@ -1,0 +1,12 @@
+:root {
+  // Primary
+  --black: #000;
+  --white: #fff;
+
+  // Transitions
+  --duration--short: 0.2s;
+  --duration--medium: 0.3s;
+  --duration--long: 0.5s;
+
+  --easing--default: cubic-bezier(0.77, 0, 0.175, 1); // Ease-in-out quatric
+}

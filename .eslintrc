@@ -1,0 +1,39 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": [
+    "airbnb-base",
+    "plugin:vue/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "overrides": [
+    {
+      "files": ["webpack.mix.js"],
+      "rules": {
+        "import/no-extraneous-dependencies": [
+          "error",
+          {
+            "devDependencies": true
+          }
+        ]
+      }
+    }
+  ],
+  "parser": "vue-eslint-parser",
+  "parserOptions": {
+    "parser": "babel-eslint",
+    "ecmaVersion": 7,
+    "jsx": true,
+    "sourceType": "module"
+  },
+  "plugins": ["simple-import-sort"],
+  "rules": {
+    "import/order": "off",
+    "no-unused-vars": ["warn"],
+    "prettier/prettier": ["warn"],
+    "simple-import-sort/sort": ["warn"]
+  }
+}
