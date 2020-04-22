@@ -10,5 +10,4 @@ hot
 /silverstripe-cache
 /themes/**/dist
 /vendor/
-mix-manifest.json
 yarn-error.log

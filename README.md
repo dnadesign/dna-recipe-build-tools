@@ -8,40 +8,36 @@ Although this provides a lot out of the box, feel free to customise it to fit th
 
 ## Setup
 
-1. Make sure you have `nvm` and `yarn` installed
+1. Make sure you have _nvm_ and _yarn_ installed
 2. Install required development extensions (see the _Development Extensions_ section)
-3. If you are using React then replace:
-    - `.eslintrc` with `react.eslintrc`
-    - `package.json` with `react.package.json`
-4. Make appropriate configuration changes to `webpack.mix.js`
+3. By default this is configured for Vue, if you are using React then move and replace the files from `themes/base/react` otherwise this folder can be deleted
+4. Make appropriate configuration changes to `webpack.env.js`
 5. Run `yarn install` in the folder containing `package.json`
 
 ## Configuration
 
-Near the top of `webpack.mix.js` are a set of constants that should be configured to match your project setup.
+Near the top of `webpack.env.js` are a set of constants that should be configured to match your project setup.
 
 -   `theme` is the name of your theme directory (default is `'base'`)
--   `prodSourceMaps` can be (default is `false`)
--   `localDomain` is the domain name for local development (default is `dna.test`)
--   `modernizrConf` is the set of modernizr options to use for automatic modernizr customisation, the full list of supported options can be found in [config-all.json](https://github.com/Modernizr/Modernizr/blob/master/lib/config-all.json)
+-   `defaultLocalDomain` is the domain name for local development (default is `dna.test`)
 
-If you prefer to have a different domain for your local environment to the one defined in `webpack.mix.js` you can define `MIX_DOMAIN` in your `.env` file.
+If you prefer to have a different domain for your local environment to the one defined in `webpack.env.js` you can define `WEBPACK_DOMAIN` in your `.env` file.
 
 ## Environment Configuration
 
 The following variables may be included in your `.env` file:
 
--   `MIX_DOMAIN`: Domain to be used by webpackDevServer and browsersync
--   `MIX_SSL_ENABLE`: Whether your local server is HTTPS, if so provide the following variables
--   `MIX_SSL_KEY`: SSL Key to be used by webpackDevServer and browsersync
--   `MIX_SSL_CERT`: SSL Cert to be used by webpackDevServer and browsersync
--   `MIX_SSL_CA`: SSL CA to be used by webpackDevServer and browsersync
+-   `WEBPACK_DOMAIN`: Domain to be used by webpackDevServer
+-   `WEBPACK_SSL_ENABLE`: Whether your local server is HTTPS, if so provide the following variables
+-   `WEBPACK_SSL_KEY`: SSL Key to be used by webpackDevServer
+-   `WEBPACK_SSL_CERT`: SSL Cert to be used by webpackDevServer
+-   `WEBPACK_SSL_CA`: SSL CA to be used by webpackDevServer
 
 ## Development Extensions
 
 Most developers at DNA use VS Code, there is workspace specific configuration for these extensions in `vscode-settings.json`, you should copy these to `.vscode/settings.json` (we don't commit this dir so you can make your own workspace customisations). If you do not use VS Code it is recommended that you use equivalent extensions/configuration for your IDE
 
-The `mix` tasks only auto-fix files when running the `prod` task (otherwise you would have to reload files every time you save), so it is recommended that you auto-fix files using extensions, we rely on VS Code extensions to do this, you can install these with the [code](https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line) CLI tool using the following command `code --install-extension <extension-id>`.
+The tasks only auto-fix files when running the `prod` task (otherwise you would have to reload files every time you save), so it is recommended that you auto-fix files using extensions, we rely on VS Code extensions to do this, you can install these with the [code](https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line) CLI tool using the following command `code --install-extension <extension-id>`.
 
 ### Required
 
@@ -56,7 +52,7 @@ These extensions are to provide code linting and formatting, this is to make sur
 
 ### Recommended
 
-These extensions are likely to improve your development experience for `js` and `scss`
+These extensions are likely to improve your development experience for _js_ and _scss_
 
 | Extension                            | Description                                         |
 | ------------------------------------ | --------------------------------------------------- |
@@ -65,10 +61,11 @@ These extensions are likely to improve your development experience for `js` and 
 | `christian-kohler.npm-intellisense`  | JS import suggestions                               |
 | `christian-kohler.path-intellisense` | File path suggestions                               |
 | `mrmlnc.vscode-scss`                 | SCSS Intellisense                                   |
+| `orta.vscode-jest`                   | Jest Integration                                    |
 
 ### Silverstripe/PHP
 
-It is likely that you will be using this build chain in conjunction with Silverstripe/PHP development, these extensions will greatly enhance your Silverstripe development experience. Note `phpcs` and `phpcbf` tools must be installed to take advantage of use the linting and formatting, this can be done by running `composer global require squizlabs/php_codesniffer`
+It is likely that you will be using this build chain in conjunction with Silverstripe/PHP development, these extensions will greatly enhance your Silverstripe development experience. Note _phpcs_ and _phpcbf_ tools must be installed to take advantage of use the linting and formatting, this can be done by running `composer global require squizlabs/php_codesniffer`
 
 | Extension                               | Description                                          |
 | --------------------------------------- | ---------------------------------------------------- |
@@ -82,14 +79,15 @@ It is likely that you will be using this build chain in conjunction with Silvers
 
 ## Tasks
 
-We use [mix](https://laravel-mix.com) as an easy-to-use wrapper for [webpack](https://webpack.js.org) (see `webpack.mix.js`)
+We use [webpack](https://webpack.js.org) (see `webpack.common.js`) to generate assets
 
 To run a task run `yarn <task-name>`
 
--   `development` or `dev`: compiles code from `src` to `dist` with source-maps
--   `watch`: complies code from `src` to `dist` with source-maps, watches for code changes and compiles accordingly, runs [browser-sync](https://www.browsersync.io/) (default is `:3000`) which auto-reloads changes
--   `hot`: serves files directly via [webpack-dev-server](https://webpack.js.org/configuration/dev-server/) (port `:8080`), uses [HMR](https://webpack.js.org/concepts/hot-module-replacement/) to update page with code changes without reloading
--   `production` or `prod`: compiles code from `src` to `dist` without source-maps, fixes
+-   `dev`: compiles code from `src` to `dist` with source-maps (see `webpack.dev.js`)
+-   `watch`: complies code from `src` to `dist` with source-maps, watches for code changes and compiles accordingly (see `webpack.dev.js`)
+-   `serve`: serves files directly via [webpack-dev-server](https://webpack.js.org/configuration/dev-server/) (port `:8080`), uses [HMR](https://webpack.js.org/concepts/hot-module-replacement/) to update page with code changes without reloading (if configured in your app), otherwise falls back to reloading on change (see `webpack.dev.js`)
+-   `prod`: compiles code from `src` to `dist` without source-maps, fixes files, performs vendor chunking (see `webpack.prod.js`)
+-   `test`: runs [jest](https://jestjs.io/) which runs any `test.jsx?`
 
 ## Javascript
 
@@ -99,61 +97,84 @@ To run a task run `yarn <task-name>`
     -   [airbnb](https://github.com/airbnb/javascript/tree/master/react) as our style guide
     -   [simple-import-sort](https://github.com/lydell/eslint-plugin-simple-import-sort) for automatic import sorting
 -   [prettier](https://prettier.io) for overall formatting (see `.prettierrc`)
+-   [modernizr] for feature detection (see `.modernizrrc.js`), the full list of supported options can be found in [config-all.json](https://github.com/Modernizr/Modernizr/blob/master/lib/config-all.json)
 
 ## CSS
 
--   [stylelint](https://stylelint.io/) lints and fixes the scss (see `.stylelintrc`)
+-   [stylelint](https://stylelint.io/) lints and fixes scss (see `.stylelintrc`)
     -   [sass-guidelines](https://sass-guidelin.es) as our style guide
     -   [stylelint-concentric-order](https://www.npmjs.com/package/stylelint-config-concentric-order) for automatic property sorting
 -   [prettier](https://prettier.io) for overall formatting (see `.prettierrc`)
--   [postcss](https://postcss.org) for CSS Processing
-    -   [normalize](https://github.com/csstools/postcss-normalize) for normalising default styles across browsers
+-   [postcss](https://postcss.org) for CSS Processing (see `postcss.config.js`)
     -   [autoprefixer](https://github.com/postcss/autoprefixer) for adding appropriate prefixes for your supported browsers
+    -   [inline-svg](https://github.com/TrySound/postcss-inline-svg) for inlining svg within css files
+    -   [normalize](https://github.com/csstools/postcss-normalize) for normalising default styles across browsers
 
 ## Browser Support
 
-Many of the build tools we use support [browserslist](https://github.com/browserslist/browserslist), you should define `browserslist` in your `package.json`, it is recommended that you use 'defaults' (Equivalent to `> 0.5%, last 2 versions, Firefox ESR, not dead`) but you can tweak it if desired. This affects babel, normalize, autoprefixer.
+Many of the build tools we use support [browserslist](https://github.com/browserslist/browserslist), you should define `browserslist` in your `package.json`, it is recommended that you use 'defaults' (Equivalent to `> 0.5%, last 2 versions, Firefox ESR, not dead`) but you can tweak it if desired. This affects _babel_, _normalize_ and _autoprefixer_.
 
-## HMR (Hot Module Reloading)
+## Javascript Testing
 
-If you plan on using HMR via the `yarn hot` command, then you will need to make your Silverstripe templates aware of the different URL (has an additional port). You will need to adjust the theme url in the PHP code accordingly.
+We use [Jest](https://jestjs.io/docs/en/getting-started.html) to test javascript components. Note there is a configuration file called `jest.config.js` where custom configuration and mocks can be added. Additionally there is `jest.setup.js` which is run before each test.
+Also included is [enzyme](https://enzymejs.github.io/enzyme/) which makes it easier to test React components.
 
-In the `<head>` of your template
+## Loading built files
 
-```html
-<% if HotURL %>
-<base href="$HotURL" />
-<% else %> <% base_tag %> <% end_if %>
-```
+Below are some PHP functions that automatically includes generated files by parsing the `stats.json` that webpack outputs (it contains has a list of `.js` and `.css` files generated). This can be helpful because `dev` produces less files than `prod` as it does not perform vendor chunking
 
 In `Page.php`
 
 ```php
-public function init()
-{
-    parent::init();
+    public function init()
+    {
+        parent::init();
 
-    if (!$this->getHotURL()) {
-        Requirements::css("eccreactapp/dist/index.css");
-        Requirements::javascript("eccreactapp/dist/manifest.js");
-        Requirements::javascript("eccreactapp/dist/vendor.js");
+        $builtChunks = $this->getBuiltReqs();
+        if ($builtChunks) {
+            if (array_key_exists('vendor', $builtChunks)) {
+                foreach ($builtChunks['vendor'] as $req) {
+                    $this->loadRequirement($req);
+                }
+                unset($builtChunks['vendor']);
+            }
+            foreach ($builtChunks as $reqs) {
+                foreach ($reqs as $req) {
+                    $this->loadRequirement($req);
+                }
+            }
+        }
     }
 
-    Requirements::javascript("eccreactapp/dist/index.js");
-}
+    /**
+     * Loads a requirement according to it's extension
+     *
+     * @return void
+     */
+    private function loadRequirement($req)
+    {
+        $ext = pathinfo($req, PATHINFO_EXTENSION);
 
-/**
- * Detects if HMR is being used and provides the webpackDevServer URL
- *
- * @return string|null
- */
-public function getHotURL()
-{
-    $hotFile = glob($_ENV['DOCUMENT_ROOT'] . '/themes/base/dist/hot');
-    if ($hotFile) {
-        return file_get_contents($hotFile[0]);
-    } else {
-        return null;
+        if ($ext === 'js') {
+            Requirements::javascript("themes/base/dist/" . $req);
+        } elseif ($ext === 'css') {
+            Requirements::css("themes/base/dist/" . $req);
+        }
     }
-}
+
+    /**
+     * Loads the list of built requirements from webpack 'stats.json'
+     *
+     * @return array|null
+     */
+    public function getBuiltReqs()
+    {
+        $statsFile = glob($_ENV['DOCUMENT_ROOT'] . '/themes/base/dist/stats.json');
+        if ($statsFile) {
+            $stats = json_decode(file_get_contents($statsFile[0]), true);
+            return array_key_exists('assetsByChunkName', $stats) ? $stats['assetsByChunkName'] : null;
+        } else {
+            return null;
+        }
+    }
 ```

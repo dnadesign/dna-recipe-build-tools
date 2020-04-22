@@ -7,11 +7,12 @@
   "extends": [
     "airbnb-base",
     "plugin:vue/recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:jest/recommended"
   ],
   "overrides": [
     {
-      "files": ["webpack.mix.js"],
+      "files": ["webpack.*.js", "postcss.config.js"],
       "rules": {
         "import/no-extraneous-dependencies": [
           "error",
@@ -19,6 +20,12 @@
             "devDependencies": true
           }
         ]
+      }
+    },
+    {
+      "files": ["*.test.js", "*.test.jsx"],
+      "globals": {
+        "Vue": true
       }
     }
   ],
@@ -29,9 +36,10 @@
     "jsx": true,
     "sourceType": "module"
   },
-  "plugins": ["simple-import-sort"],
+  "plugins": ["simple-import-sort", "jest"],
   "rules": {
     "import/order": "off",
+    "import/no-named-as-default": "off",
     "no-unused-vars": ["warn"],
     "prettier/prettier": ["warn"],
     "simple-import-sort/sort": ["warn"]

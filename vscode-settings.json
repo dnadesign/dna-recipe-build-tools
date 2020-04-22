@@ -1,5 +1,14 @@
 {
   "[javascript]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
+    "editor.formatOnSave": true
+  },
+  "[json]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
     "editor.formatOnSave": true
   },
   "[php]": {
@@ -7,16 +16,17 @@
     "editor.formatOnSave": true
   },
   "[scss]": {
-    "editor.formatOnSave": true
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": true
+    },
+    "editor.formatOnSave": false
   },
   "css.validate": false,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true,
-    "source.fixAll.stylelint": true
-  },
-  "eslint.enable": true,
+  "eslint.format.enable": true,
+  "eslint.lintTask.enable": true,
   "eslint.packageManager": "yarn",
   "javascript.format.enable": false,
+  "json.format.enable": false,
   "less.validate": false,
   "namespaceResolver.showMessageOnStatusBar": true,
   "namespaceResolver.sortAlphabetically": true,

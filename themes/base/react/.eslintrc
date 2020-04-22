@@ -1,0 +1,53 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true,
+        "node": true
+    },
+    "extends": [
+        "airbnb",
+        "plugin:prettier/recommended",
+        "plugin:jest/recommended"
+    ],
+    "overrides": [
+        {
+            "files": ["webpack.*.js", "postcss.config.js"],
+            "rules": {
+                "import/no-extraneous-dependencies": [
+                    "error",
+                    {
+                        "devDependencies": true
+                    }
+                ]
+            }
+        },
+        {
+            "files": ["*.test.js", "*.test.jsx"],
+            "globals": {
+                "React": true
+            }
+        }
+    ],
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaVersion": 7,
+        "jsx": true,
+        "sourceType": "module"
+    },
+    "plugins": ["simple-import-sort", "jest"],
+    "rules": {
+        "import/order": "off",
+        "import/no-named-as-default": "off",
+        "no-unused-vars": ["warn"],
+        "prettier/prettier": ["warn"],
+        "simple-import-sort/sort": ["warn"],
+        "react/forbid-prop-types": "off",
+        "react/jsx-props-no-spreading": "off",
+        "class-methods-use-this": "off"
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    }
+}
