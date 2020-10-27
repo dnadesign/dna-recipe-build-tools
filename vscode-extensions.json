@@ -1,0 +1,23 @@
+{
+  "recommendations": [
+    "editorconfig.editorconfig",
+    "adrianhumphreys.silverstripe",
+    "arcanis.vscode-zipfs",
+    "bmewburn.vscode-intelephense-client",
+    "christian-kohler.npm-intellisense",
+    "christian-kohler.path-intellisense",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "felixfbecker.php-debug",
+    "mehedidracula.php-namespace-resolver",
+    "mrmlnc.vscode-scss",
+    "neilbrayfield.php-docblocker",
+    "orta.vscode-jest",
+    "phproberto.vscode-php-getters-setters",
+    "streetsidesoftware.code-spell-checker",
+    "stylelint.vscode-stylelint",
+    "valeryanm.vscode-phpsab",
+    "wix.vscode-import-cost",
+    "joelday.docthis"
+  ]
+}

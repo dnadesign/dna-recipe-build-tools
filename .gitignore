@@ -1,13 +1,25 @@
-.env
-*.map
-hot
-/.solr
-/.vscode
-/fulltextsearch-localsolr
-/node_modules
-/public/_resources
-/public/assets
-/silverstripe-cache
-/themes/**/dist
+# Dirs
+/.solr/
+/.vscode/
+/fulltextsearch-localsolr/
+/public/_resources/
+/public/assets/
+/silverstripe-cache/
+/themes/**/dist/
 /vendor/
+
+# Development files
+.env
+.vscode
+*.hot-update.*
+*.map
+silverstripe.log
+
+# Yarn 2
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
 yarn-error.log

@@ -1,15 +1,34 @@
 import 'modernizr';
 import '../scss/index.scss';
 
-import Example, { ExampleSelector } from '../components/Example/Example';
+import { polyfill as polyfillPromise } from 'es6-promise';
 
-window.addEventListener('DOMContentLoaded', () => {
-  // Detect IE11
-  if (!!window.MSInputMethodContext && !!document.documentMode) {
-    document.documentElement.classList.add(['ie11']);
-  }
+// Load polyfills on IE11
+if (!!window.MSInputMethodContext && !!document.documentMode) {
+  polyfillPromise();
+  // eslint-disable-next-line no-unused-expressions
+  import(/* webpackChunkName: "polyfills" */ './polyfills').then(() => {
+    import(/* webpackChunkName: "components" */ './components').then(
+      ({ default: loadComponents }) => {
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', loadComponents);
+        } else {
+          loadComponents();
+        }
+      }
+    );
+  });
 
-  if (document.querySelector(ExampleSelector)) {
-    Example();
-  }
-});
+  document.documentElement.classList.add(['ie11']);
+} else {
+  // Otherwise load components when the DOM is ready
+  import(/* webpackChunkName: "components" */ './components').then(
+    ({ default: loadComponents }) => {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadComponents);
+      } else {
+        loadComponents();
+      }
+    }
+  );
+}

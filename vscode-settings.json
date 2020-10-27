@@ -24,6 +24,7 @@
   "css.validate": false,
   "eslint.format.enable": true,
   "eslint.lintTask.enable": true,
+  "eslint.nodePath": "themes/base/.yarn/sdks",
   "eslint.packageManager": "yarn",
   "javascript.format.enable": false,
   "json.format.enable": false,
@@ -35,7 +36,16 @@
   "php.validate.enable": false,
   "phpsab.snifferMode": "onType",
   "phpsab.standard": "PSR2",
+  "prettier.prettierPath": "themes/base/.yarn/sdks/prettier/index.js",
   "scss.validate": false,
+  "search.exclude": {
+    "**/.pnp.*": true,
+    "**/.yarn": true
+  },
+  "stylelint.configBasedir": "themes/base/",
   "stylelint.enable": true,
-  "stylelint.packageManager": "yarn"
+  "stylelint.packageManager": "yarn",
+  "stylelint.stylelintPath": "themes/base/.yarn/sdks/stylelint/lib/index.js",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.tsdk": "themes/base/.yarn/sdks/typescript/lib"
 }

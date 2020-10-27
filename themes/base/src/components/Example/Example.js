@@ -2,18 +2,20 @@ import './Example.scss';
 
 import Vue from 'vue';
 
-export const ExampleSelector = '.example';
+const componentSelector = '.example';
 
-const Example = () =>
+export const Example = () =>
   new Vue({
-    el: ExampleSelector,
+    el: componentSelector,
     name: 'Example',
     data: {
       exampleTitle: ''
     },
     mounted() {
-      this.exampleTitle = this.$el.dataset.exampletitle;
+      this.exampleTitle = this.$el.dataset.exampleTitle;
     }
   });
 
-export default Example;
+export default function init() {
+  if (document.querySelector(componentSelector)) Example();
+}

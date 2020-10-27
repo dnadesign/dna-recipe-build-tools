@@ -1,12 +1,8 @@
 <!DOCTYPE html>
 <%-- 'no-js' is removed by modernizr if it loads --%>
-<html class="no-js" lang="en-NZ">
+<html class="no-js" lang="$ContentLocale">
     <head>
-        <% if HotURL %>
-            <base href="$HotURL">
-        <% else %>
-            <% base_tag %>
-        <% end_if %>
+        <% base_tag %>
 
         <meta charset="utf-8" />
         <title>$Title – $SiteConfig.Title</title>
@@ -19,6 +15,6 @@
     </head>
 
     <body>
-        <div class="example" data-exampletitle="Vue is running">{{ exampletitle }}</div>
+        <div class="example" data-example-title="Vue is running">{{ exampleTitle }}</div>
     </body>
 </html>

@@ -15,13 +15,15 @@ const PATHS = {
   dist: './dist', // where generated files are stored
   static: './static', // where static files are stored
   templates: './templates', // where template files are stored
-  public: `/themes/${theme}/dist` // where files are served from
+  public: `/_resources/themes/${theme}/dist/` // where files are served from
 };
 module.exports.PATHS = PATHS;
 
 // Feature detection
 const isUsingHTTPS =
-  'WEBPACK_SSL_ENABLE' in process.env ? process.env.WEBPACK_SSL_ENABLE : false;
+  'WEBPACK_SSL_ENABLE' in process.env
+    ? process.env.WEBPACK_SSL_ENABLE === 'true'
+    : false;
 module.exports.isUsingHTTPS = isUsingHTTPS;
 
 // The domain name for local development (Used for webpackDevServer)
@@ -34,8 +36,8 @@ module.exports.localDomain = localDomain;
 module.exports.localURL = localURL;
 
 const secureLocalDomain = {
-  key: process.env.WEBPACK_SSL_KEY,
   cert: process.env.WEBPACK_SSL_CERT,
+  key: process.env.WEBPACK_SSL_KEY,
   ca: process.env.WEBPACK_SSL_CA
 };
 module.exports.secureLocalDomain = secureLocalDomain;
