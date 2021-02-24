@@ -4942,6 +4942,7 @@ __metadata:
     eslint-webpack-plugin: ^2.2.1
     events-polyfill: ^2.1.2
     file-loader: ^6.2.0
+    focus-visible: ^5.2.0
     ie11-custom-properties: ^4.1.0
     import-glob-loader2: ^1.1.2
     jest: ^26.6.3
@@ -6265,6 +6266,13 @@ __metadata:
   version: 2.0.2
   resolution: "flatted@npm:2.0.2"
   checksum: a3e5fb71ad3c4f0661cd3899864812bcf3f64bdf6aa5f33f967c9c2a8a5f0c7219707e864c0602115fef40e093415f76a43e77afd0a86990904e2217ddb44eb4
+  languageName: node
+  linkType: hard
+
+"focus-visible@npm:^5.2.0":
+  version: 5.2.0
+  resolution: "focus-visible@npm:5.2.0"
+  checksum: 4e60302bd84accb92d11c22f8a5f6e38d2f5a0cc1bd45e708b9f00173cc700d1f0782c78f932023479074739fd588e0dd94c0e2575b2212843955e2d4398e752
   languageName: node
   linkType: hard
 

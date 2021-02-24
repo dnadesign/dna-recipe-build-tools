@@ -3,6 +3,16 @@
   --black: #000;
   --white: #fff;
 
+  // Links
+  --link-color: #05f;
+  --link-color-hover: #fff;
+
+  // Buttons
+  --button-color: #05f;
+  --button-color-hover: #03f;
+  --button-text-color: var(--white);
+  --button-text-color-hover: var(--white);
+
   // Transitions
   --duration--short: 0.2s;
   --duration--medium: 0.3s;

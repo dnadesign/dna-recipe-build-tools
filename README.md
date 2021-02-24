@@ -188,9 +188,9 @@ If intending to use React follow these steps:
 
 ## Loading built files
 
-Below are some PHP functions that automatically includes generated files by parsing the `webpack-assets.json` that webpack outputs (it contains has a list of `.js` and `.css` files generated). This can be helpful because `dev` produces less files than `prod` as it does not perform vendor chunking
+Below are some PHP functions that automatically includes generated files by parsing the `webpack-assets.json` that webpack outputs (it contains has a list of `.js` and `.css` files generated). This can be helpful because `dev` produces less files than `prod` as it does not perform vendor chunking.
 
-In `Page.php`
+In `PageController.php`
 
 ```php
     public function init()
@@ -199,6 +199,16 @@ In `Page.php`
 
         Requirements::set_force_js_to_bottom(true);
         $this->loadBuiltReqs();
+    }
+
+    /**
+     * Get the webpack-assets.json, returns false if not present
+     *
+     * @return array|false
+     */
+    public function getWebpackAssets()
+    {
+        return glob(THEMES_PATH . '/base/dist/webpack-assets.json');
     }
 
     /**
@@ -230,10 +240,9 @@ In `Page.php`
      */
     public function loadBuiltReqs()
     {
-        $assetsFile = glob(THEMES_PATH . '/base/dist/webpack-assets.json');
+        $assetsFile = $this->getWebpackAssets();
 
-        // If there is no assets file or avoid applying styles to the login form
-        if (!$assetsFile || $this->curr() instanceof Security) {
+        if (!$assetsFile) {
             return;
         }
 
@@ -262,5 +271,29 @@ In `Page.php`
                 $this->loadRequirement($type, $fileName);
             }
         }
+    }
+
+    /**
+     * Returns the favicon.ico url if webpack assets are built
+     *
+     * @return string|false
+     */
+    public function getFaviconICO()
+    {
+        return $this->getWebpackAssets()
+            ? ModuleResourceLoader::singleton()->resolveResource(THEMES_PATH . '/base/dist/static/favicons/favicon.ico')
+            : false;
+    }
+
+    /**
+     * Returns the favicon.svg url if webpack assets are built
+     *
+     * @return string|false
+     */
+    public function getFaviconSVG()
+    {
+        return $this->getWebpackAssets()
+            ? ModuleResourceLoader::singleton()->resolveResource(THEMES_PATH . '/base/dist/static/favicons/favicon.svg')
+            : false;
     }
 ```

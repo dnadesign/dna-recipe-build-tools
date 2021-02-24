@@ -1,0 +1,96 @@
+@mixin typography-list {
+  margin: 0;
+  margin-top: rem(16px);
+  margin-bottom: rem(16px);
+  padding: 0;
+  list-style: none;
+  list-style-position: inside;
+  line-height: 1.5;
+  font-size: rem(16px);
+}
+
+@mixin typography-li {
+  margin-top: 0;
+  padding-left: rem(20px);
+  font-size: inherit;
+
+  &::before {
+    display: inline-block;
+    margin-left: -rem(20px);
+    width: rem(20px);
+    text-align: left;
+  }
+
+  & + & {
+    margin-top: rem(20px);
+  }
+}
+
+@mixin typography-ul {
+  @include typography-list;
+
+  // Level 1
+  li::before {
+    content: '•';
+  }
+
+  ul {
+    // Level 2
+    li::before {
+      content: '–';
+    }
+  }
+}
+
+@mixin typography-ol {
+  @include typography-list;
+
+  ::marker {
+    text-align: left;
+  }
+
+  // Level 1
+  li {
+    counter-increment: level1;
+
+    &::before {
+      content: counter(level1, decimal) '.';
+    }
+  }
+
+  ol {
+    // Level 2
+    li {
+      counter-increment: level2;
+
+      &::before {
+        content: counter(level2, lower-alpha) '.';
+      }
+    }
+
+    ol {
+      // Level 3
+      li {
+        counter-increment: level3;
+
+        &::before {
+          content: counter(level3, lower-roman) '.';
+        }
+      }
+    }
+  }
+}
+
+.typography {
+  li {
+    @include typography-li;
+  }
+
+  ul {
+    @include typography-ul;
+  }
+
+  ol {
+    @include typography-ol;
+  }
+}

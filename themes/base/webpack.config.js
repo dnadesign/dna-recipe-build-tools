@@ -17,7 +17,7 @@ const {
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const PrettierPlugin = require('prettier-webpack-plugin');
 const StylelintPlugin = require('stylelint-webpack-plugin');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const { VueLoaderPlugin } = require('vue-loader');
 const WebpackBar = require('webpackbar');
 const path = require('path');
 const { ProvidePlugin } = require('webpack');
@@ -38,7 +38,7 @@ module.exports = {
 
   entry: {
     main: `${PATHS.src}/js/index.js`,
-    editor: `${PATHS.src}/js/editor.js`
+    editor: `${PATHS.src}/scss/editor.scss`
   },
 
   output: {
@@ -112,16 +112,18 @@ module.exports = {
     // Makes webpack CLI output more readable
     new FriendlyErrorsWebpackPlugin({ clearConsole: false }),
 
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({
+      filename: (pathData) => {
+        return pathData.chunk.name === 'editor' || !isProd
+          ? '[name].css'
+          : '[name].[contenthash].bundle.css';
+      }
+    }),
 
     // Exposes global variables to other files
     new ProvidePlugin({
       $: 'jquery',
-      jQuery: 'jquery',
-      DO: [
-        path.resolve(__dirname, `${PATHS.src}/js/jquery/do.src.js`),
-        'default'
-      ]
+      jQuery: 'jquery'
     }),
 
     // Apply consistent coding style guidelines, don't run when watching as it's slow
@@ -146,6 +148,8 @@ module.exports = {
   module: {
     rules: [
       // JavaScript – use Babel to transpile JavaScript files.
+      // Excludes all node_modules, since they are already processed
+      // Re-include certain modules by adding them within `(?!)` with a `|`
       {
         test: /\.(jsx?)$/,
         exclude: /(node_modules\/(?![gmap-vue])|vendor|modernizr.js)/,
@@ -224,6 +228,15 @@ module.exports = {
         secure: false,
         headers: {
           'X-Dev-Server-Proxy': localURL
+        },
+        // Modify CSP header to allow for hot-updating
+        onProxyRes: (proxyRes) => {
+          if ('content-security-policy' in proxyRes.headers) {
+            // eslint-disable-next-line no-param-reassign
+            proxyRes.headers['content-security-policy'] = proxyRes.headers[
+              'content-security-policy'
+            ].replace('connect-src', `connect-src wss://${localDomain}:8080`);
+          }
         }
       }
     }
@@ -237,6 +250,9 @@ module.exports = {
       minSize: 0,
       chunks: 'all',
       cacheGroups: {
+        // Create a vendor file, which is usually updated less often
+        // Should be cached longer, includes all node_modules, excluding polyfills
+        // Exclude others by adding them within `(?!)` with a `|`
         vendor: {
           name: 'vendor',
           test: /[\\/]node_modules[\\/](?!whatwg-fetch|core-js)/

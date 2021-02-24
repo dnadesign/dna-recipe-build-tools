@@ -1,6 +1,6 @@
 {
   "name": "dna-recipe-build-tools",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "author": "DNA",
   "license": "UNLICENSED",
   "private": true,
@@ -10,11 +10,11 @@
     "not op_mini all"
   ],
   "scripts": {
-    "watch": "webpack --progress --watch --config webpack.config.js",
-    "serve": "webpack serve --progress --config webpack.config.js",
-    "dev": "webpack --progress --config webpack.config.js",
-    "prod": "NODE_ENV=production webpack --progress --config webpack.config.js",
-    "test": "jest"
+    "dev": "webpack",
+    "prod": "NODE_ENV=production webpack",
+    "serve": "webpack serve",
+    "test": "jest",
+    "watch": "webpack --watch"
   },
   "devDependencies": {
     "@artemir/friendly-errors-webpack-plugin": "^2.0.4",
@@ -97,6 +97,7 @@
     "element-closest-polyfill": "^1.0.2",
     "es6-promise": "^4.2.8",
     "events-polyfill": "^2.1.2",
+    "focus-visible": "^5.2.0",
     "ie11-custom-properties": "^4.1.0",
     "modernizr": "^3.11.3",
     "prop-types": "^15.7.2",

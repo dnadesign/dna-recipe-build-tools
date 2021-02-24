@@ -1,0 +1,38 @@
+@mixin typography-p {
+  line-height: 1.5;
+  font-size: rem(16px);
+}
+
+@mixin typography-em {
+  font-style: italic;
+}
+
+@mixin typography-strong {
+  font-weight: 600;
+}
+
+@mixin typography-hr {
+  margin: rem(16px) 0;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+}
+
+.typography {
+  p {
+    @include typography-p;
+  }
+
+  i,
+  em {
+    @include typography-em;
+  }
+
+  b,
+  strong {
+    @include typography-strong;
+  }
+
+  hr {
+    @include typography-hr;
+  }
+}

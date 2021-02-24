@@ -1,0 +1,49 @@
+@mixin typography-h1 {
+  font-size: rem(30px);
+}
+
+@mixin typography-h2 {
+  font-size: rem(25px);
+}
+
+@mixin typography-h3 {
+  font-size: rem(20px);
+}
+
+@mixin typography-h4 {
+  font-size: rem(18px);
+}
+
+@mixin typography-h5 {
+  font-size: rem(16px);
+}
+
+@mixin typography-h6 {
+  font-size: rem(14px);
+}
+
+.typography {
+  h1 {
+    @include typography-h1;
+  }
+
+  h2 {
+    @include typography-h2;
+  }
+
+  h3 {
+    @include typography-h3;
+  }
+
+  h4 {
+    @include typography-h4;
+  }
+
+  h5 {
+    @include typography-h5;
+  }
+
+  h6 {
+    @include typography-h6;
+  }
+}

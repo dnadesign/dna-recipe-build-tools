@@ -8,14 +8,7 @@
     "string-quotes": "single",
     "max-nesting-depth": 4,
     "order/properties-alphabetical-order": null,
-    "selector-no-qualifying-type": [
-      true,
-      {
-        "ignore": [
-          "attribute"
-        ]
-      }
-    ],
+    "selector-no-qualifying-type": null,
     "rule-empty-line-before": [
       "always",
       {

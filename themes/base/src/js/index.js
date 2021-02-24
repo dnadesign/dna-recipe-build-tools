@@ -1,4 +1,5 @@
 import 'modernizr';
+import 'focus-visible';
 import '../scss/index.scss';
 
 import { polyfill as polyfillPromise } from 'es6-promise';
