@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<%-- 'no-js' is removed by modernizr if it loads --%>
-<html class="no-js" lang="$ContentLocale">
+<html lang="$ContentLocale">
     <head>
         <% base_tag %>
 

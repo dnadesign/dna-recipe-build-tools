@@ -12,7 +12,10 @@
   ],
   "overrides": [
     {
-      "files": ["webpack.*.js", "postcss.config.js"],
+      "files": [
+        "webpack.*.js",
+        "postcss.config.js"
+      ],
       "rules": {
         "import/no-extraneous-dependencies": [
           "error",
@@ -23,7 +26,10 @@
       }
     },
     {
-      "files": ["*.test.js", "*.test.jsx"],
+      "files": [
+        "*.test.js",
+        "*.test.jsx"
+      ],
       "globals": {
         "Vue": true
       }
@@ -31,18 +37,34 @@
   ],
   "parser": "vue-eslint-parser",
   "parserOptions": {
-    "parser": "babel-eslint",
     "ecmaVersion": 7,
     "jsx": true,
+    "parser": "@babel/eslint-parser",
     "sourceType": "module"
   },
-  "plugins": ["simple-import-sort", "jest"],
+  "plugins": [
+    "simple-import-sort",
+    "jest"
+  ],
   "rules": {
-    "import/order": "off",
+    "import/extensions": [
+      "error",
+      {
+        "vue": "never"
+      }
+    ],
     "import/no-named-as-default": "off",
-    "no-unused-vars": ["warn"],
-    "prettier/prettier": ["warn"],
-    "simple-import-sort/sort": ["warn"]
+    "import/order": "off",
+    "no-unused-vars": [
+      "warn"
+    ],
+    "prettier/prettier": [
+      "warn"
+    ],
+    "simple-import-sort/exports": "warn",
+    "simple-import-sort/imports": "warn"
   },
-  "settings": { "import/resolver": "webpack" }
+  "settings": {
+    "import/resolver": "webpack"
+  }
 }

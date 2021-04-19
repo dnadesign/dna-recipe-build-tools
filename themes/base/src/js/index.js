@@ -1,4 +1,3 @@
-import 'modernizr';
 import 'focus-visible';
 import '../scss/index.scss';
 

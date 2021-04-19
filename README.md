@@ -68,7 +68,7 @@ These extensions are likely to improve your development experience for _js_ and 
 | `arcanis.vscode-zipfs`                  | Handle yarn 2 zips               |
 | `christian-kohler.npm-intellisense`     | JS import suggestions            |
 | `christian-kohler.path-intellisense`    | File path suggestions            |
-| `joelday.docthis`                       | Generate JSDoc                   |
+| `oouo-diogo-perdigao.docthis`           | Generate JSDoc                   |
 | `mrmlnc.vscode-scss`                    | SCSS Intellisense                |
 | `orta.vscode-jest`                      | Jest Integration                 |
 | `streetsidesoftware.code-spell-checker` | Spellchecker                     |
@@ -110,7 +110,6 @@ To run a task run `yarn <task-name>`
     -   [airbnb](https://github.com/airbnb/javascript/tree/master/react) as our style guide
     -   [simple-import-sort](https://github.com/lydell/eslint-plugin-simple-import-sort) for automatic import sorting
 -   [prettier](https://prettier.io) for overall formatting (see `.prettierrc`)
--   [modernizr] for feature detection (see `.modernizrrc.js`), the full list of supported options can be found in [config-all.json](https://github.com/Modernizr/Modernizr/blob/master/lib/config-all.json)
 
 ## CSS
 

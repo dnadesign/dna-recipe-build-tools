@@ -11,9 +11,6 @@ const AssetsPlugin = require('assets-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
-const {
-  FriendlyErrorsWebpackPlugin
-} = require('@artemir/friendly-errors-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const PrettierPlugin = require('prettier-webpack-plugin');
 const StylelintPlugin = require('stylelint-webpack-plugin');
@@ -31,7 +28,7 @@ module.exports = {
 
   devtool: isProd ? false : 'source-map',
 
-  stats: isProd && { colors: true, assets: false, modules: false },
+  stats: isProd ? { colors: true, assets: false, modules: false, timings: false } : 'errors-only',
 
   // Temporary fix for serve
   target: isProd ? 'browserslist' : 'web',
@@ -60,7 +57,6 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.vue'],
     alias: {
-      modernizr: path.resolve(__dirname, './.modernizrrc.js'),
       'tiny-slider': 'tiny-slider/src/tiny-slider',
       vue: 'vue/dist/vue.esm.js'
     },
@@ -109,8 +105,6 @@ module.exports = {
       extensions: ['js', 'jsx', 'vue']
     }),
 
-    // Makes webpack CLI output more readable
-    new FriendlyErrorsWebpackPlugin({ clearConsole: false }),
 
     new MiniCssExtractPlugin({
       filename: (pathData) => {
@@ -152,14 +146,8 @@ module.exports = {
       // Re-include certain modules by adding them within `(?!)` with a `|`
       {
         test: /\.(jsx?)$/,
-        exclude: /(node_modules\/(?![gmap-vue])|vendor|modernizr.js)/,
+        exclude: /(node_modules\/(?![gmap-vue])|vendor)/,
         use: [{ loader: 'babel-loader' }, { loader: 'import-glob-loader2' }]
-      },
-
-      // Modernizr – generate modernizr.js from .modernizrrc.js
-      {
-        test: /\.modernizrrc\.js$/,
-        loader: 'webpack-modernizr-loader'
       },
 
       // Styles – inject CSS into the head with source maps
@@ -220,7 +208,6 @@ module.exports = {
     https: isUsingHTTPS && secureLocalDomain,
     port: 8080,
     publicPath: PATHS.public,
-    quiet: true,
     writeToDisk: true,
     proxy: {
       '**': {
