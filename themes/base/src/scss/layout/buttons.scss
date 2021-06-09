@@ -1,11 +1,8 @@
 @mixin button {
-  appearance: none;
+  @include reset-button;
   display: inline-block;
   flex: 0 0 auto;
-  border: 0;
   background-color: transparent;
-  cursor: pointer;
-  padding: 0;
   color: var(--button-text-color);
   font-family: inherit;
   font-size: rem(16px);
@@ -47,10 +44,8 @@
 }
 
 @mixin button--icon {
-  appearance: none;
   box-sizing: content-box;
   transition: var(--trs-default);
-  border: 0;
   border-radius: 50%;
   background-color: var(--button-color);
   background-position: center;
@@ -73,8 +68,8 @@
 }
 
 @mixin button--link {
+  @include reset-button;
   @include typography-a;
-  background: none;
   padding: 0 5px;
   text-decoration: none;
   line-height: 1.5;

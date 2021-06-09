@@ -16,10 +16,10 @@
 silverstripe.log
 
 # Yarn 2
-.yarn/*
-!.yarn/releases
-!.yarn/plugins
-!.yarn/sdks
-!.yarn/versions
+themes/base/.yarn/*
+!themes/base/.yarn/releases
+!themes/base/.yarn/plugins
+!themes/base/.yarn/sdks
+!themes/base/.yarn/versions
 .pnp.*
 yarn-error.log

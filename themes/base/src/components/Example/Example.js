@@ -4,9 +4,9 @@ import Vue from 'vue';
 
 const componentSelector = '.example';
 
-export const Example = () =>
+export const Example = (el) =>
   new Vue({
-    el: componentSelector,
+    el,
     name: 'Example',
     data: {
       exampleTitle: ''
@@ -16,6 +16,6 @@ export const Example = () =>
     }
   });
 
-export default function init() {
-  if (document.querySelector(componentSelector)) Example();
+export default function init(scope = document) {
+  scope.querySelectorAll(componentSelector).forEach((el) => Example(el));
 }

@@ -6,7 +6,7 @@
   ],
   "rules": {
     "string-quotes": "single",
-    "max-nesting-depth": 4,
+    "max-nesting-depth": null,
     "order/properties-alphabetical-order": null,
     "selector-no-qualifying-type": null,
     "rule-empty-line-before": [

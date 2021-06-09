@@ -24,8 +24,8 @@ $grid-columns: 12;
 $grid-gutter-width: 2rem;
 $grid-row-columns: 6;
 
-@import '~bootstrap-scss/mixins/breakpoints';
-@import '~bootstrap-scss/mixins/grid-framework';
-@import '~bootstrap-scss/mixins/grid';
+@import 'bootstrap-scss/mixins/breakpoints';
+@import 'bootstrap-scss/mixins/grid-framework';
+@import 'bootstrap-scss/mixins/grid';
 
-@import '~bootstrap-scss/grid';
+@import 'bootstrap-scss/grid';

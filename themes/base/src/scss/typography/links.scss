@@ -1,5 +1,5 @@
 @mixin typography-a {
-  @include link--underline;
+  @include link-underline;
   text-decoration: none;
   color: var(--link-color);
 

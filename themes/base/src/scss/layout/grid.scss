@@ -1,3 +1,26 @@
+$container-width: calc(1200px + (2 * #{rem(24px)}));
+
 .container {
-  max-width: 80rem;
+  max-width: $container-width;
+
+  @include media-breakpoint-up(md) {
+    padding-right: rem(24px);
+    padding-left: rem(24px);
+  }
+}
+
+.container--content {
+  max-width: calc(540px + (2 * #{rem(16px)}));
+
+  @include media-breakpoint-up(md) {
+    max-width: calc(540px + (2 * #{rem(24px)}));
+  }
+
+  @include media-breakpoint-up(lg) {
+    max-width: calc(800px + (2 * #{rem(24px)}));
+  }
+}
+
+.row--center {
+  justify-content: center;
 }

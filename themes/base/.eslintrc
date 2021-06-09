@@ -12,10 +12,7 @@
   ],
   "overrides": [
     {
-      "files": [
-        "webpack.*.js",
-        "postcss.config.js"
-      ],
+      "files": ["webpack.*.js", "postcss.config.js"],
       "rules": {
         "import/no-extraneous-dependencies": [
           "error",
@@ -26,10 +23,7 @@
       }
     },
     {
-      "files": [
-        "*.test.js",
-        "*.test.jsx"
-      ],
+      "files": ["*.test.js", "*.test.jsx"],
       "globals": {
         "Vue": true
       }
@@ -38,14 +32,15 @@
   "parser": "vue-eslint-parser",
   "parserOptions": {
     "ecmaVersion": 7,
+    "requireConfigFile": false,
     "jsx": true,
     "parser": "@babel/eslint-parser",
-    "sourceType": "module"
+    "sourceType": "module",
+    "babelOptions": {
+      "rootMode": "upward-optional"
+    }
   },
-  "plugins": [
-    "simple-import-sort",
-    "jest"
-  ],
+  "plugins": ["simple-import-sort", "jest"],
   "rules": {
     "import/extensions": [
       "error",
@@ -55,12 +50,8 @@
     ],
     "import/no-named-as-default": "off",
     "import/order": "off",
-    "no-unused-vars": [
-      "warn"
-    ],
-    "prettier/prettier": [
-      "warn"
-    ],
+    "no-unused-vars": ["warn"],
+    "prettier/prettier": ["warn"],
     "simple-import-sort/exports": "warn",
     "simple-import-sort/imports": "warn"
   },

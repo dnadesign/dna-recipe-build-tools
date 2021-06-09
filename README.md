@@ -54,9 +54,10 @@ These extensions are to provide code linting and formatting, this is to make sur
 
 | Extension                    | Description                 |
 | ---------------------------- | --------------------------- |
-| `editorconfig.editorconfig`  | Consistent spacing in files |
 | `dbaeumer.vscode-eslint`     | JS linting and fixing       |
+| `editorconfig.editorconfig`  | Consistent spacing in files |
 | `esbenp.prettier-vscode`     | File formatting             |
+| `octref.vetur`               | .vue file support           |
 | `stylelint.vscode-stylelint` | SCSS linting and fixing     |
 
 ### Recommended
@@ -68,11 +69,12 @@ These extensions are likely to improve your development experience for _js_ and 
 | `arcanis.vscode-zipfs`                  | Handle yarn 2 zips               |
 | `christian-kohler.npm-intellisense`     | JS import suggestions            |
 | `christian-kohler.path-intellisense`    | File path suggestions            |
-| `oouo-diogo-perdigao.docthis`           | Generate JSDoc                   |
 | `mrmlnc.vscode-scss`                    | SCSS Intellisense                |
+| `oouo-diogo-perdigao.docthis`           | Generate JSDoc                   |
 | `orta.vscode-jest`                      | Jest Integration                 |
 | `streetsidesoftware.code-spell-checker` | Spellchecker                     |
 | `wix.vscode-import-cost`                | Displays the size of imported js |
+| `drknoxy.eslint-disable-snippets`       | Snippets for eslint-disable      |
 
 ### Silverstripe/PHP
 

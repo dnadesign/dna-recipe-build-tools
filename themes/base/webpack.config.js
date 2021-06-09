@@ -4,7 +4,7 @@ const {
   isUsingHTTPS,
   secureLocalDomain,
   PATHS
-} = require('./webpack.env.js');
+} = require('./webpack.env');
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const AssetsPlugin = require('assets-webpack-plugin');
@@ -18,6 +18,7 @@ const { VueLoaderPlugin } = require('vue-loader');
 const WebpackBar = require('webpackbar');
 const path = require('path');
 const { ProvidePlugin } = require('webpack');
+const excludeNodeModulesExcept = require('babel-loader-exclude-node-modules-except');
 
 const isProd = process.env.NODE_ENV === 'production';
 const isWatching =
@@ -28,7 +29,9 @@ module.exports = {
 
   devtool: isProd ? false : 'source-map',
 
-  stats: isProd ? { colors: true, assets: false, modules: false, timings: false } : 'errors-only',
+  stats: isProd
+    ? { colors: true, assets: false, modules: false, timings: false }
+    : 'errors-warnings',
 
   // Temporary fix for serve
   target: isProd ? 'browserslist' : 'web',
@@ -105,8 +108,8 @@ module.exports = {
       extensions: ['js', 'jsx', 'vue']
     }),
 
-
     new MiniCssExtractPlugin({
+      experimentalUseImportModule: true,
       filename: (pathData) => {
         return pathData.chunk.name === 'editor' || !isProd
           ? '[name].css'
@@ -146,7 +149,7 @@ module.exports = {
       // Re-include certain modules by adding them within `(?!)` with a `|`
       {
         test: /\.(jsx?)$/,
-        exclude: /(node_modules\/(?![gmap-vue])|vendor)/,
+        exclude: excludeNodeModulesExcept(['gmap-vue']),
         use: [{ loader: 'babel-loader' }, { loader: 'import-glob-loader2' }]
       },
 
@@ -179,17 +182,10 @@ module.exports = {
       // Vue template
       {
         test: /\.vue$/,
-        loader: 'vue-loader'
-      },
-
-      // Vue SVG loading
-      {
-        test: /\.svg$/,
-        issuer: /\.vue$/,
         use: [
-          'babel-loader',
+          { loader: 'vue-loader' },
           {
-            loader: 'vue-svg-loader',
+            loader: 'vue-svg-inline-loader',
             options: {
               svgo: {
                 plugins: [{ mergePaths: false }, { removeViewBox: false }]

@@ -1,6 +1,16 @@
 html {
   background: var(--white);
+  height: 100%;
   line-height: 1.2;
+  -webkit-font-smoothing: antialiased;
+
+  @media (min-resolution: 192dpi) {
+    -webkit-font-smoothing: auto;
+  }
+}
+
+body {
+  min-height: 100vh;
 }
 
 img {
