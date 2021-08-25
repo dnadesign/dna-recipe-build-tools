@@ -17,8 +17,8 @@ const StylelintPlugin = require('stylelint-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 const WebpackBar = require('webpackbar');
 const path = require('path');
-const { ProvidePlugin } = require('webpack');
-const excludeNodeModulesExcept = require('babel-loader-exclude-node-modules-except');
+const { DefinePlugin, ProvidePlugin } = require('webpack');
+const babelLoaderExcludeNodeModulesExcept = require('babel-loader-exclude-node-modules-except');
 
 const isProd = process.env.NODE_ENV === 'production';
 const isWatching =
@@ -33,9 +33,6 @@ module.exports = {
     ? { colors: true, assets: false, modules: false, timings: false }
     : 'errors-warnings',
 
-  // Temporary fix for serve
-  target: isProd ? 'browserslist' : 'web',
-
   entry: {
     main: `${PATHS.src}/js/index.js`,
     editor: `${PATHS.src}/scss/editor.scss`
@@ -44,28 +41,13 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, PATHS.dist),
     filename: isProd ? '[name].[contenthash].bundle.js' : '[name].bundle.js',
-    publicPath: PATHS.public,
-    // Generate with IE11 compat
-    environment: {
-      arrowFunction: false,
-      bigIntLiteral: false,
-      const: false,
-      destructuring: false,
-      dynamicImport: false,
-      forOf: false,
-      module: false
-    }
+    publicPath: PATHS.public
   },
 
   resolve: {
     extensions: ['.js', '.jsx', '.vue'],
     alias: {
-      'tiny-slider': 'tiny-slider/src/tiny-slider',
-      vue: 'vue/dist/vue.esm.js'
-    },
-    fallback: {
-      url: require.resolve('url/'),
-      punycode: require.resolve('punycode/')
+      vue: 'vue/dist/vue.esm-bundler.js'
     }
   },
 
@@ -101,6 +83,11 @@ module.exports = {
     //   ]
     // }),
 
+    new DefinePlugin({
+      __VUE_OPTIONS_API__: true,
+      __VUE_PROD_DEVTOOLS__: false
+    }),
+
     // Apply consistent coding style guidelines for javascript
     new ESLintPlugin({
       context: PATHS.src,
@@ -115,12 +102,6 @@ module.exports = {
           ? '[name].css'
           : '[name].[contenthash].bundle.css';
       }
-    }),
-
-    // Exposes global variables to other files
-    new ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery'
     }),
 
     // Apply consistent coding style guidelines, don't run when watching as it's slow
@@ -146,10 +127,10 @@ module.exports = {
     rules: [
       // JavaScript – use Babel to transpile JavaScript files.
       // Excludes all node_modules, since they are already processed
-      // Re-include certain modules by adding them within `(?!)` with a `|`
+      // Re-include certain modules by adding them within babelLoaderExcludeNodeModulesExcept
       {
         test: /\.(jsx?)$/,
-        exclude: excludeNodeModulesExcept(['gmap-vue']),
+        exclude: babelLoaderExcludeNodeModulesExcept(['gmap-vue']),
         use: [{ loader: 'babel-loader' }, { loader: 'import-glob-loader2' }]
       },
 
@@ -162,7 +143,12 @@ module.exports = {
             loader: 'css-loader',
             options: { importLoaders: 1 }
           },
-          { loader: 'resolve-url-loader' },
+          {
+            loader: 'resolve-url-loader',
+            options: {
+              silent: true
+            }
+          },
           // sourceMap always required on loaders preceding resolve-url-loader
           { loader: 'postcss-loader', options: { sourceMap: true } },
           { loader: 'sass-loader', options: { sourceMap: true } },
@@ -173,10 +159,7 @@ module.exports = {
       // Fonts and images – Copy files to build folder
       {
         test: /\.(ico|gif|png|jpe?g|svg|webp|woff2?)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[path][name].[ext]'
-        }
+        type: 'asset/resource'
       },
 
       // Vue template
@@ -200,11 +183,18 @@ module.exports = {
   devServer: {
     compress: true,
     host: localDomain,
-    hot: true,
     https: isUsingHTTPS && secureLocalDomain,
     port: 8080,
-    publicPath: PATHS.public,
-    writeToDisk: true,
+    client: {
+      overlay: {
+        warnings: false,
+        errors: true
+      }
+    },
+    devMiddleware: {
+      publicPath: PATHS.public,
+      writeToDisk: true
+    },
     proxy: {
       '**': {
         target: localURL,

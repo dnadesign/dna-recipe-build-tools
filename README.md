@@ -4,7 +4,7 @@
 
 This is a collection of tools, configurations and recommendations for setting up a project. It provides build tooling setup for SilverStripe based websites, which includes Vue (or optionally React) and recommended extensions for a productive development experience within the IDE developers use at DNA – [Visual Studio Code](https://code.visualstudio.com) (VS Code).
 
-Note that this boilerplate uses yarn v2 (berry) which handles node modules quite differently than it previously did, please consult the [yarn docs](https://yarnpkg.com) for an overview and explanation of these changes.
+Note that this boilerplate uses yarn v3 (berry) which handles node modules quite differently than it previously did, please consult the [yarn docs](https://yarnpkg.com) for an overview and explanation of these changes.
 
 Although this provides a lot out of the box, feel free to customise it to fit the project.
 
@@ -14,7 +14,8 @@ Although this provides a lot out of the box, feel free to customise it to fit th
 2. Install required development extensions (see the _Development Extensions_ section)
 3. By default this is configured for Vue, if you are using React then move and replace the files from `themes/base/react` otherwise this folder can be deleted
 4. Make appropriate configuration changes to `webpack.env.js`
-5. Run `yarn install` in the folder containing `package.json`
+5. Uncomment and modify folder entries within the `CopyWebpackPlugin` options in `webpack.config.js`
+6. Run `yarn install` in the folder containing `package.json`
 
 ## Configuration
 
@@ -50,7 +51,7 @@ If you do not use VS Code it is recommended that you use equivalent extensions/c
 
 ### Required
 
-These extensions are to provide code linting and formatting, this is to make sure that we are avoiding common pitfalls and writing code the same style, it will mean that you will avoid having to fix errors reported by the build task, as you will be warned about errors while typing and files will be fixed on save.
+These extensions are to provide code linting and formatting, this is to make sure that we are avoiding common pitfalls and writing code the same style. These extensions help us to fix errors before triggering the build task, as you will be warned about errors while typing and files will be fixed on save.
 
 | Extension                    | Description                 |
 | ---------------------------- | --------------------------- |
@@ -64,17 +65,16 @@ These extensions are to provide code linting and formatting, this is to make sur
 
 These extensions are likely to improve your development experience for _js_ and _scss_
 
-| Extension                               | Description                      |
-| --------------------------------------- | -------------------------------- |
-| `arcanis.vscode-zipfs`                  | Handle yarn 2 zips               |
-| `christian-kohler.npm-intellisense`     | JS import suggestions            |
-| `christian-kohler.path-intellisense`    | File path suggestions            |
-| `mrmlnc.vscode-scss`                    | SCSS Intellisense                |
-| `oouo-diogo-perdigao.docthis`           | Generate JSDoc                   |
-| `orta.vscode-jest`                      | Jest Integration                 |
-| `streetsidesoftware.code-spell-checker` | Spellchecker                     |
-| `wix.vscode-import-cost`                | Displays the size of imported js |
-| `drknoxy.eslint-disable-snippets`       | Snippets for eslint-disable      |
+| Extension                               | Description                 |
+| --------------------------------------- | --------------------------- |
+| `arcanis.vscode-zipfs`                  | Handle yarn 2 zips          |
+| `christian-kohler.npm-intellisense`     | JS import suggestions       |
+| `christian-kohler.path-intellisense`    | File path suggestions       |
+| `mrmlnc.vscode-scss`                    | SCSS Intellisense           |
+| `oouo-diogo-perdigao.docthis`           | Generate JSDoc              |
+| `orta.vscode-jest`                      | Jest Integration            |
+| `streetsidesoftware.code-spell-checker` | Spellchecker                |
+| `drknoxy.eslint-disable-snippets`       | Snippets for eslint-disable |
 
 ### Silverstripe/PHP
 
@@ -126,7 +126,9 @@ To run a task run `yarn <task-name>`
 
 ## Browser Support
 
-Many of the build tools we use support [browserslist](https://github.com/browserslist/browserslist), you should define `browserslist` in your `package.json`, it is recommended that you use 'defaults' (Equivalent to `> 0.5%, last 2 versions, Firefox ESR, not dead`) but you can tweak it if desired. This affects _babel_, _normalize_ and _autoprefixer_.
+Many of the build tools we use support [browserslist](https://github.com/browserslist/browserslist), you should define `browserslist` in your `package.json`. We have chosen a list which roughly equates to supporting the last 2 versions of major browsers and specifically excludes IE, since we have stopped officially supporting it.
+
+This list affects transformations performed by _babel_, _normalize_ and _autoprefixer_.
 
 ## Javascript Testing
 
@@ -175,13 +177,13 @@ If intending to use React follow these steps:
     // Uncomment if using mobx
     // import 'mobx-react/batchingForReactDom';
 
-    import Enzyme from 'enzyme';
-    import Adapter from 'enzyme-adapter-react-16';
+    import Enzyme from "enzyme";
+    import Adapter from "enzyme-adapter-react-16";
     // Uncomment if using mobx
     // import { configure as MobxConfigure } from 'mobx';
-    import React from 'react';
+    import React from "react";
 
-    MobxConfigure({ enforceActions: 'observed' });
+    MobxConfigure({ enforceActions: "observed" });
     Enzyme.configure({ adapter: new Adapter() });
 
     global.React = React;

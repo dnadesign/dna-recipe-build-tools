@@ -7,7 +7,7 @@ require('dotenv').config();
 // Customise these as desired
 
 const theme = 'base';
-const defaultLocalDomain = 'dna.test';
+const defaultLocalDomain = 'local.dna.co.nz';
 
 // Path definitions
 const PATHS = {
@@ -36,8 +36,8 @@ module.exports.localDomain = localDomain;
 module.exports.localURL = localURL;
 
 const secureLocalDomain = {
+  cacert: process.env.WEBPACK_SSL_CA,
   cert: process.env.WEBPACK_SSL_CERT,
-  key: process.env.WEBPACK_SSL_KEY,
-  ca: process.env.WEBPACK_SSL_CA
+  key: process.env.WEBPACK_SSL_KEY
 };
 module.exports.secureLocalDomain = secureLocalDomain;

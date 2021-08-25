@@ -19,4 +19,20 @@
   --duration-long: 0.5s;
 
   --easing-default: cubic-bezier(0.77, 0, 0.175, 1); // Ease-in-out quatric
+
+  --trs-short: all var(--duration-short) var(--easing-default);
+  --trs-medium: all var(--duration-medium) var(--easing-default);
+  --trs-long: all var(--duration-long) var(--easing-default);
+  --trs-default: var(--trs-short);
+
+  --gutter: #{rem(16px)};
+  --safe-gutters: calc(
+    max(env(safe-area-inset-right), var(--gutter)) +
+      max(env(safe-area-inset-left), var(--gutter))
+  );
+  --container-width: calc(1200px + (2 * var(--gutter)));
+
+  @include media-breakpoint-up(md) {
+    --gutter: #{rem(24px)};
+  }
 }

@@ -1,20 +1,21 @@
 import './Example.scss';
 
-import Vue from 'vue';
+import { createApp } from 'vue';
 
 const componentSelector = '.example';
 
 export const Example = (el) =>
-  new Vue({
-    el,
+  createApp({
     name: 'Example',
-    data: {
-      exampleTitle: ''
+    data() {
+      return {
+        exampleTitle: ''
+      };
     },
     mounted() {
-      this.exampleTitle = this.$el.dataset.exampleTitle;
+      this.exampleTitle = el.dataset.exampleTitle;
     }
-  });
+  }).mount(el);
 
 export default function init(scope = document) {
   scope.querySelectorAll(componentSelector).forEach((el) => Example(el));
