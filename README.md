@@ -14,8 +14,7 @@ Although this provides a lot out of the box, feel free to customise it to fit th
 2. Install required development extensions (see the _Development Extensions_ section)
 3. By default this is configured for Vue, if you are using React then move and replace the files from `themes/base/react` otherwise this folder can be deleted
 4. Make appropriate configuration changes to `webpack.env.js`
-5. Uncomment and modify folder entries within the `CopyWebpackPlugin` options in `webpack.config.js`
-6. Run `yarn install` in the folder containing `package.json`
+5. Run `yarn install` in the folder containing `package.json`
 
 ## Configuration
 
@@ -281,22 +280,11 @@ In `PageController.php`
      *
      * @return string|false
      */
-    public function getFaviconICO()
+    public function getFavicon($type = 'ico')
     {
-        return $this->getWebpackAssets()
-            ? ModuleResourceLoader::singleton()->resolveResource(THEMES_PATH . '/base/dist/static/favicons/favicon.ico')
-            : false;
-    }
-
-    /**
-     * Returns the favicon.svg url if webpack assets are built
-     *
-     * @return string|false
-     */
-    public function getFaviconSVG()
-    {
-        return $this->getWebpackAssets()
-            ? ModuleResourceLoader::singleton()->resolveResource(THEMES_PATH . '/base/dist/static/favicons/favicon.svg')
-            : false;
+        if (!$this->getWebpackAssets()) {
+            return false;
+        }
+        return ModuleResourceLoader::singleton()->resolveResource("/_resources/themes/base/dist/static/favicons/favicon.$type");
     }
 ```

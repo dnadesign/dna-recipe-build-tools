@@ -17,7 +17,7 @@ const StylelintPlugin = require('stylelint-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 const WebpackBar = require('webpackbar');
 const path = require('path');
-const { DefinePlugin, ProvidePlugin } = require('webpack');
+const { DefinePlugin } = require('webpack');
 const babelLoaderExcludeNodeModulesExcept = require('babel-loader-exclude-node-modules-except');
 
 const isProd = process.env.NODE_ENV === 'production';
@@ -34,7 +34,7 @@ module.exports = {
     : 'errors-warnings',
 
   entry: {
-    main: `${PATHS.src}/js/index.js`,
+    main: [`${PATHS.src}/js/index.js`, `${PATHS.src}/scss/index.scss`],
     editor: `${PATHS.src}/scss/editor.scss`
   },
 
@@ -66,22 +66,20 @@ module.exports = {
     }),
 
     // Copies files from target to destination folder.
-    // new CopyWebpackPlugin({
-    //   patterns: [
-    //     {
-    //       from: `${PATHS.static}/images`,
-    //       to: 'static/images'
-    //     },
-    //     {
-    //       from: `${PATHS.static}/favicons`,
-    //       to: 'static/favicons'
-    //     },
-    //     {
-    //       from: `${PATHS.static}/svg`,
-    //       to: 'static/svg'
-    //     }
-    //   ]
-    // }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: `${PATHS.static}/favicons`,
+          to: 'static/favicons',
+          noErrorOnMissing: true
+        },
+        {
+          from: `${PATHS.static}/svg`,
+          to: 'static/svg',
+          noErrorOnMissing: true
+        }
+      ]
+    }),
 
     new DefinePlugin({
       __VUE_OPTIONS_API__: true,
@@ -96,7 +94,7 @@ module.exports = {
     }),
 
     new MiniCssExtractPlugin({
-      experimentalUseImportModule: true,
+      // experimentalUseImportModule: true, https://github.com/webpack/webpack/issues/12102
       filename: (pathData) => {
         return pathData.chunk.name === 'editor' || !isProd
           ? '[name].css'

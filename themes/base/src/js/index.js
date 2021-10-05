@@ -1,5 +1,4 @@
 import 'focus-visible';
-import '../scss/index.scss';
 
 import smoothscroll from 'smoothscroll-polyfill';
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="$ContentLocale">
+<html lang="en-NZ">
     <head>
         <% base_tag %>
 
@@ -12,11 +12,12 @@
         <link rel="canonical" href="$AbsoluteLink" />
         <meta name="theme-color" content="#05f" />
 
-        <% if $FaviconSVG %><link rel="icon" type="image/svg+xml" href="$FaviconSVG"><% end_if %>
-        <% if $FaviconICO %><link rel="alternate icon" href="$FaviconICO"><% end_if %>
+        <% if $getFavicon('svg') %><link rel="icon" type="image/svg+xml" href="$getFavicon('svg')"><% end_if %>
+        <% if $getFavicon('png') %><link rel="icon" type="image/png" href="$getFavicon('png')"><% end_if %>
+        <% if $getFavicon('ico') %><link rel="alternate icon" href="$getFavicon('ico')"><% end_if %>
     </head>
 
-    <body class="page--{$ClassName.ShortName.LowerCase}">
+    <body class="page--{$ContentSource.ClassName.ShortName.LowerCase}">
         <div class="example" data-example-title="Vue is running">{{ exampleTitle }}</div>
     </body>
 </html>

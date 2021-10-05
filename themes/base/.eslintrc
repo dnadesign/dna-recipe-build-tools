@@ -42,12 +42,6 @@
   },
   "plugins": ["simple-import-sort", "jest"],
   "rules": {
-    "import/extensions": [
-      "error",
-      {
-        "vue": "never"
-      }
-    ],
     "import/no-named-as-default": "off",
     "import/order": "off",
     "no-unused-vars": ["warn"],
