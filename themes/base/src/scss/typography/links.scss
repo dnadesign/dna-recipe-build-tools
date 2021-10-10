@@ -1,22 +1,19 @@
 @mixin typography-a {
-  @include link-underline;
-  text-decoration: none;
-  color: var(--link-color);
-
-  &:hover,
-  &.focus-visible {
-    color: var(--link-color-hover);
-  }
+  @include link-highlight(true);
+  padding-top: 0.25em;
+  padding-bottom: 0.125em;
 
   &[href^='http'] {
     &::after {
       display: inline-block;
-      transition: background-image var(--duration-short) var(--easing-default);
+      transition: var(--trs-default);
       margin-left: 5px;
-      background-image: svg-load('link-external.svg', stroke=#000); // --black
-      width: 9px;
+      background-color: var(--link-color);
+      width: 10px;
       height: 10px;
       content: '';
+      mask-image: url('../../../static/svg/link-external.svg');
+      mask-size: cover;
 
       @media print {
         display: inline;
@@ -30,15 +27,10 @@
     &:hover,
     &.focus-visible {
       &::after {
-        background-image: svg-load('link-external.svg', stroke=#fff); // --white
+        background-color: var(--link-color-hover);
       }
     }
   }
-}
-
-@mixin typography-link {
-  display: inline-block;
-  font-size: rem(16px);
 }
 
 @mixin typography-link-download {
@@ -46,37 +38,36 @@
   color: currentColor;
 
   &-name {
-    display: inline-block;
     transition: var(--trs-default);
-    box-shadow: $line var(--link-color);
+    box-shadow: $highlight--underline var(--link-color);
     text-decoration: none;
     color: var(--link-color);
 
     &::after {
       display: inline-block;
-      transition: background-image var(--duration-short) var(--easing-default);
+      transition: var(--trs-default);
       margin-left: 5px;
-      background-image: svg-load('link-download.svg', stroke=#000); // --black
-      width: 9px;
-      height: 10px;
+      background-color: currentColor;
+      background-color: var(--link-color);
+      width: 14px;
+      height: 13px;
       content: '';
+      mask-size: cover;
+      mask-image: url('../../../static/svg/link-download.svg');
     }
   }
 
-  @at-root {
-    .typography &:hover .link__download-name,
-    .typography &.focus-visible .link__download-name {
-      box-shadow: $line--hover var(--link-color);
-      color: var(--link-color-hover);
+  &:hover .link__download-name,
+  &.focus-visible .link__download-name {
+    box-shadow: $highlight--hover var(--link-color);
+    color: var(--link-color-hover);
 
-      &::after {
-        background-image: svg-load('link-download.svg', stroke=#fff); // --white
-      }
+    &::after {
+      background-color: var(--link-color-hover);
     }
   }
 
   &-details {
-    display: inline-block;
     text-transform: uppercase;
     letter-spacing: rem(0.5px);
     font-size: rem(11px);
@@ -87,10 +78,6 @@
 .typography {
   a:not(.link__download):not(.button) {
     @include typography-a;
-  }
-
-  .link {
-    @include typography-link;
   }
 
   .link__download {

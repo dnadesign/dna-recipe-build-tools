@@ -1,0 +1,30 @@
+@mixin image-caption {
+  margin-top: 15px;
+  font-size: rem(14px);
+}
+
+picture {
+  display: block;
+}
+
+figure {
+  margin: 0;
+}
+
+figcaption {
+  @include image-caption;
+}
+
+.image {
+  &--with-caption {
+    margin-bottom: 0;
+
+    @include media-breakpoint-up(sm) {
+      margin-bottom: 0;
+    }
+
+    @include media-breakpoint-up(lg) {
+      margin-bottom: 0;
+    }
+  }
+}

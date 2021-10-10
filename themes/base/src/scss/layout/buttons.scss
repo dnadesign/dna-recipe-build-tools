@@ -2,14 +2,17 @@
   @include reset-button;
   display: inline-block;
   flex: 0 0 auto;
+  transition: var(--trs-default);
   background-color: transparent;
+  padding-top: 15px;
+  padding-bottom: 10px;
+  text-decoration: none;
   color: var(--button-text-color);
-  font-family: inherit;
   font-size: rem(16px);
-  font-weight: 600;
+  font-weight: 700;
 
-  @media print {
-    border: 1px solid var(--grey-dark);
+  @include media-breakpoint-up(sm) {
+    font-size: rem(18px);
   }
 
   &[disabled] {
@@ -22,31 +25,38 @@
   }
 }
 
-.button {
-  @include button;
-}
+@mixin button--primary {
+  border: 2px solid var(--button-color);
+  padding-right: 30px;
+  padding-left: 30px;
 
-@mixin button--text {
-  transition: var(--trs-default);
-  border-radius: 9999px; // forces circular corners
-  background-color: var(--button-color);
-  padding: 10px 30px;
-
-  &:not([disabled]):hover,
-  &:not([disabled]).focus-visible {
+  &:hover,
+  &.focus-visible {
     background-color: var(--button-color-hover);
     color: var(--button-text-color-hover);
   }
 }
 
-.button--text {
-  @include button--text;
+@mixin button--secondary {
+  box-shadow: inset 0 -2px var(--button-color);
+
+  &:hover,
+  &.focus-visible {
+    box-shadow: inset 0 calc((1em + (15px * 2)) * -1) var(--button-color-hover);
+    color: var(--button-text-color-hover);
+  }
+}
+
+@mixin button--inverse {
+  --button-color: var(--white);
+  --button-color-hover: var(--white);
+  --button-text-color: var(--white);
+  --button-text-color-hover: var(--black);
 }
 
 @mixin button--icon {
   box-sizing: content-box;
   transition: var(--trs-default);
-  border-radius: 50%;
   background-color: var(--button-color);
   background-position: center;
   background-repeat: no-repeat;
@@ -63,19 +73,22 @@
   }
 }
 
-.button--icon {
-  @include button--icon;
-}
+.button {
+  @include button;
 
-@mixin button--link {
-  @include reset-button;
-  @include typography-a;
-  padding: 0 5px;
-  text-decoration: none;
-  line-height: 1.5;
-  color: var(--white);
-}
+  &--primary {
+    @include button--primary;
+  }
 
-.button--link {
-  @include button--link;
+  &--secondary {
+    @include button--secondary;
+  }
+
+  &--inverse {
+    @include button--inverse;
+  }
+
+  &--icon {
+    @include button--icon;
+  }
 }

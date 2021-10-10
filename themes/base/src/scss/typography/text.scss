@@ -12,9 +12,19 @@
 }
 
 @mixin typography-hr {
-  margin: rem(16px) 0;
+  margin: 15px 0;
   border: 0;
   border-bottom: 1px solid currentColor;
+}
+
+@mixin typography-blockquote {
+  position: relative;
+  margin: 40px 0;
+  padding: 0;
+
+  @include media-breakpoint-up(sm) {
+    margin: 70px 0 50px;
+  }
 }
 
 .typography {
@@ -34,5 +44,9 @@
 
   hr {
     @include typography-hr;
+  }
+
+  blockquote {
+    @include typography-blockquote;
   }
 }

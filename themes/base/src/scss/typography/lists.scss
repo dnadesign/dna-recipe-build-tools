@@ -1,28 +1,51 @@
 @mixin typography-list {
   margin: 0;
-  margin-top: rem(16px);
-  margin-bottom: rem(16px);
+  margin-top: 15px;
+  margin-bottom: 15px;
   padding: 0;
   list-style: none;
   list-style-position: inside;
   line-height: 1.5;
   font-size: rem(16px);
+
+  @include media-breakpoint-up(sm) {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: rem(18px);
+  }
+
+  ul,
+  ol {
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+    @include media-breakpoint-up(sm) {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+  }
 }
 
 @mixin typography-li {
   margin-top: 0;
-  padding-left: rem(20px);
+  padding-left: 20px;
   font-size: inherit;
 
   &::before {
     display: inline-block;
-    margin-left: -rem(20px);
-    width: rem(20px);
+    margin-left: -20px;
+    width: 20px;
     text-align: left;
   }
 
-  & + & {
-    margin-top: rem(20px);
+  + li {
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+    @include media-breakpoint-up(sm) {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
   }
 }
 

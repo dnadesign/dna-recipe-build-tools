@@ -2,15 +2,24 @@
   // Primary
   --black: #000;
   --white: #fff;
+  --outline-color: var(--theme-primary, var(--hineahuone-primary));
+
+  // Text
+  --text-color-dark: var(--black);
+  --text-color-light: var(--white);
+  --text-color-disabled: #9d9fa1;
+
+  // Forms
+  --error-color: #ff2600;
 
   // Links
-  --link-color: #05f;
-  --link-color-hover: #fff;
+  --link-color: var(--text-color-dark);
+  --link-color-hover: var(--text-color-light);
 
   // Buttons
-  --button-color: #05f;
-  --button-color-hover: #03f;
-  --button-text-color: var(--white);
+  --button-color: var(--black);
+  --button-color-hover: var(--black);
+  --button-text-color: var(--black);
   --button-text-color-hover: var(--white);
 
   // Transitions
@@ -32,7 +41,7 @@
   );
   --container-width: calc(1200px + (2 * var(--gutter)));
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(sm) {
     --gutter: #{rem(24px)};
   }
 }

@@ -11,3 +11,17 @@
     max-width: calc(800px + var(--safe-gutters));
   }
 }
+
+.container--narrow {
+  max-width: calc(540px + var(--safe-gutters));
+
+  @include media-breakpoint-up(lg) {
+    max-width: calc(1000px + var(--safe-gutters));
+  }
+}
+
+.container--form {
+  @include media-breakpoint-up(lg) {
+    max-width: calc(600px + var(--safe-gutters));
+  }
+}

@@ -1,0 +1,78 @@
+@mixin typography-table {
+  margin-bottom: 20px;
+  min-width: max(400px, 100%);
+
+  @include media-breakpoint-up(sm) {
+    margin-bottom: 40px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    margin-bottom: 50px;
+  }
+
+  tr:first-child {
+    th,
+    td {
+      padding-top: 0;
+    }
+  }
+
+  th,
+  td {
+    border-bottom: 1px solid var(--black);
+    padding: 15px;
+    padding-left: 0;
+    vertical-align: top;
+    word-break: initial;
+
+    @include media-breakpoint-up(sm) {
+      padding: 20px;
+      padding-left: 0;
+    }
+
+    &,
+    > * {
+      // We need to make sure that child paragraphs etc use the right size
+      font-size: rem(14px);
+
+      @include media-breakpoint-up(sm) {
+        font-size: rem(16px);
+      }
+    }
+
+    *:first-child {
+      margin-top: 0;
+    }
+
+    *:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  th {
+    height: 100%;
+    vertical-align: top;
+    text-align: left;
+    text-transform: uppercase;
+
+    &,
+    * {
+      // We need to make sure that child paragraphs etc use the right font
+      // @include font--bold;
+    }
+  }
+
+  td {
+    &,
+    > * {
+      // We need to make sure that child paragraphs etc use the right font
+      // @include font--regular;
+    }
+  }
+}
+
+.typography:not(.video__transcript) {
+  table {
+    @include typography-table;
+  }
+}

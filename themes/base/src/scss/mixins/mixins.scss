@@ -1,17 +1,26 @@
 @use 'sass:math';
 
-$line: inset 0 -1px 0 0;
-$line--hover: inset 0 -1.6em 0 0;
+$highlight--no-underline: inset 0 0 0 0;
+$highlight--underline: inset 0 -1px 0 0;
+$highlight--hover: inset 0 -1.6em 0 0;
 
-@mixin link-underline {
+@mixin link-highlight($underline: false) {
   transition: var(--trs-default);
-  box-shadow: $line var(--link-color);
-  padding-bottom: 2px;
+
+  @if $underline {
+    box-shadow: $highlight--underline var(--link-highlight, var(--link-color));
+  } @else {
+    box-shadow: $highlight--no-underline
+      var(--link-highlight, var(--link-color));
+  }
   text-decoration: none;
+  color: var(--link-color);
+  box-decoration-break: clone;
 
   &:hover,
   &.focus-visible {
-    box-shadow: $line--hover var(--link-color);
+    box-shadow: $highlight--hover var(--link-highlight, var(--link-color));
+    color: var(--link-color-hover);
   }
 
   @media print {
@@ -29,4 +38,29 @@ $line--hover: inset 0 -1.6em 0 0;
   background: none;
   cursor: pointer;
   padding: 0;
+}
+
+@mixin line-clamp($num) {
+  /* stylelint-disable */
+  display: -webkit-box;
+  -webkit-line-clamp: $num;
+  -webkit-box-orient: vertical;
+  /* stylelint-enable */
+  overflow: hidden;
+}
+
+@mixin background-image-svg($icon, $fill: none, $stroke: none) {
+  background-image: svg-load(
+    '#{$icon}',
+    'fill: #{$fill}',
+    'stroke: #{$stroke}'
+  );
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@mixin outline {
+  outline: var(--outline-color) solid 2px;
+  outline-offset: 2px;
 }
