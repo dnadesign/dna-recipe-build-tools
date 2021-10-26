@@ -1,0 +1,35 @@
+extends:
+  - stylelint-config-sass-guidelines
+  - stylelint-config-concentric-order
+  - stylelint-config-prettier
+overrides:
+  - customSyntax: 'postcss-scss'
+    files:
+      - '**/*.scss'
+rules:
+  string-quotes: single
+  max-nesting-depth:
+  order/properties-alphabetical-order:
+  selector-no-qualifying-type:
+  rule-empty-line-before:
+    - always
+    - ignore:
+        - after-comment
+        - first-nested
+  order/order:
+    - - custom-properties
+      - dollar-variables
+      - type: at-rule
+        name: extend
+      - type: at-rule
+        name: include
+        hasBlock: false
+      - declarations
+      - type: at-rule
+        name: include
+        hasBlock: true
+      - rules
+    - severity: warning
+  selector-class-pattern:
+    - "^[a-z0-9\\-_]+$"
+    - message: Selector should be written in lowercase with hyphens or underscores (selector-class-pattern)

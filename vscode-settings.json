@@ -3,6 +3,7 @@
     "editor.codeActionsOnSave": {
       "source.fixAll.eslint": true
     },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true
   },
   "[json]": {
@@ -19,7 +20,8 @@
     "editor.codeActionsOnSave": {
       "source.fixAll.stylelint": true
     },
-    "editor.formatOnSave": false
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
   },
   "css.validate": false,
   "eslint.format.enable": true,
@@ -45,7 +47,9 @@
   "stylelint.configBasedir": "themes/base/",
   "stylelint.enable": true,
   "stylelint.packageManager": "yarn",
+  "stylelint.snippet": ["css", "scss", "less", "postcss"],
   "stylelint.stylelintPath": "themes/base/.yarn/sdks/stylelint/lib/index.js",
+  "stylelint.validate": ["css", "scss", "less", "postcss"],
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "typescript.tsdk": "themes/base/.yarn/sdks/typescript/lib"
 }

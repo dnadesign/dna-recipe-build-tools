@@ -94,12 +94,10 @@ module.exports = {
     }),
 
     new MiniCssExtractPlugin({
-      // experimentalUseImportModule: true, https://github.com/webpack/webpack/issues/12102
-      filename: (pathData) => {
-        return pathData.chunk.name === 'editor' || !isProd
+      filename: (pathData) =>
+        pathData.chunk.name === 'editor' || !isProd
           ? '[name].css'
-          : '[name].[contenthash].bundle.css';
-      }
+          : '[name].[contenthash].bundle.css'
     }),
 
     // Apply consistent coding style guidelines, don't run when watching as it's slow
