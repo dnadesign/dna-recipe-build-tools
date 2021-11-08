@@ -5,10 +5,10 @@ module.exports = {
       '@babel/preset-env',
       {
         useBuiltIns: 'entry',
-        corejs: { version: 3 }
-      }
+        corejs: { version: 3 },
+      },
     ],
-    'airbnb'
+    'airbnb',
   ],
   plugins: [
     ['@babel/plugin-proposal-class-properties', { loose: true }],
@@ -19,7 +19,7 @@ module.exports = {
     ['@babel/plugin-proposal-private-property-in-object', { loose: true }],
     '@babel/plugin-syntax-dynamic-import',
     '@babel/plugin-transform-runtime',
-    'react-html-attrs'
+    'react-html-attrs',
   ],
   env: {
     dev: { plugins: [] },
@@ -28,10 +28,10 @@ module.exports = {
         [
           '__coverage__',
           {
-            ignore: '*.test.*'
-          }
-        ]
-      ]
-    }
-  }
+            ignore: '*.test.*',
+          },
+        ],
+      ],
+    },
+  },
 };

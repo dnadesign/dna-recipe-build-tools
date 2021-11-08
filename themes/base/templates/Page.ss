@@ -18,6 +18,6 @@
     </head>
 
     <body class="page--{$ContentSource.ClassName.ShortName.LowerCase}">
-        <div class="example" data-example-title="Vue is running">{{ exampleTitle }}</div>
+        <div class="example-title" data-example-title="Vue is running">{{ exampleTitle }}</div>
     </body>
 </html>

@@ -1,7 +1,7 @@
-import Example from '../components/Example/Example';
+import ExampleTitle from '../components/ExampleTitle/ExampleTitle';
 
 export function loadComponents() {
-  Example();
+  ExampleTitle();
 }
 
 export default loadComponents;

@@ -15,7 +15,7 @@
 *.map
 silverstripe.log
 
-# Yarn 2
+# Yarn
 themes/base/.yarn/*
 !themes/base/.yarn/releases
 !themes/base/.yarn/plugins
