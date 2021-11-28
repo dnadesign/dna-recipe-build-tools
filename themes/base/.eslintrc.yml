@@ -4,9 +4,9 @@ env:
   node: true
 extends:
   - airbnb-base
-  - prettier
   - plugin:vue/recommended
   - plugin:jest/recommended
+  - prettier
 overrides:
   - files:
       - webpack.*.js

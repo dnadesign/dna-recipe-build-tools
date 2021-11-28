@@ -3,7 +3,7 @@ const {
   localDomain,
   isUsingHTTPS,
   secureLocalDomain,
-  PATHS
+  PATHS,
 } = require('./webpack.env');
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -35,20 +35,20 @@ module.exports = {
 
   entry: {
     main: [`${PATHS.src}/js/index.js`, `${PATHS.src}/scss/index.scss`],
-    editor: `${PATHS.src}/scss/editor.scss`
+    editor: `${PATHS.src}/scss/editor.scss`,
   },
 
   output: {
     path: path.resolve(__dirname, PATHS.dist),
     filename: isProd ? '[name].[contenthash].bundle.js' : '[name].bundle.js',
-    publicPath: PATHS.public
+    publicPath: PATHS.public,
   },
 
   resolve: {
     extensions: ['.js', '.jsx', '.vue'],
     alias: {
-      vue: 'vue/dist/vue.esm-bundler.js'
-    }
+      vue: 'vue/dist/vue.esm-bundler.js',
+    },
   },
 
   plugins: [
@@ -56,13 +56,13 @@ module.exports = {
     new AssetsPlugin({
       includeAllFileTypes: false,
       path: path.resolve(__dirname, PATHS.dist),
-      prettyPrint: true
+      prettyPrint: true,
     }),
 
     // Removes/cleans build folders and unused assets when rebuilding.
     new CleanWebpackPlugin({
       cleanStaleWebpackAssets: false,
-      cleanOnceBeforeBuildPatterns: ['**/*', '!webpack-assets.json']
+      cleanOnceBeforeBuildPatterns: ['**/*', '!webpack-assets.json'],
     }),
 
     // Copies files from target to destination folder.
@@ -71,33 +71,33 @@ module.exports = {
         {
           from: `${PATHS.static}/favicons`,
           to: 'static/favicons',
-          noErrorOnMissing: true
+          noErrorOnMissing: true,
         },
         {
           from: `${PATHS.static}/svg`,
           to: 'static/svg',
-          noErrorOnMissing: true
-        }
-      ]
+          noErrorOnMissing: true,
+        },
+      ],
     }),
 
     new DefinePlugin({
       __VUE_OPTIONS_API__: true,
-      __VUE_PROD_DEVTOOLS__: false
+      __VUE_PROD_DEVTOOLS__: false,
     }),
 
     // Apply consistent coding style guidelines for javascript
     new ESLintPlugin({
       context: PATHS.src,
       fix: true,
-      extensions: ['js', 'jsx', 'vue']
+      extensions: ['js', 'jsx', 'vue'],
     }),
 
     new MiniCssExtractPlugin({
       filename: (pathData) =>
         pathData.chunk.name === 'editor' || !isProd
           ? '[name].css'
-          : '[name].[contenthash].bundle.css'
+          : '[name].[contenthash].bundle.css',
     }),
 
     // Apply consistent coding style guidelines, don't run when watching as it's slow
@@ -106,7 +106,7 @@ module.exports = {
     // Apply consistent coding style guidelines for (s)css
     new StylelintPlugin({
       files: `${PATHS.src}/**/*.((c|sa|sc)ss)`,
-      fix: true
+      fix: true,
     }),
 
     new VueLoaderPlugin(),
@@ -114,8 +114,8 @@ module.exports = {
     new WebpackBar({
       name: isProd ? 'prod' : 'dev',
       color: 'blue',
-      fancy: true
-    })
+      fancy: true,
+    }),
   ],
 
   // Module
@@ -127,7 +127,7 @@ module.exports = {
       {
         test: /\.(jsx?)$/,
         exclude: babelLoaderExcludeNodeModulesExcept(['gmap-vue']),
-        use: [{ loader: 'babel-loader' }, { loader: 'import-glob-loader2' }]
+        use: [{ loader: 'babel-loader' }, { loader: 'import-glob-loader2' }],
       },
 
       // Styles – inject CSS into the head with source maps
@@ -137,25 +137,25 @@ module.exports = {
           MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
-            options: { importLoaders: 1 }
+            options: { importLoaders: 1 },
           },
           {
             loader: 'resolve-url-loader',
             options: {
-              silent: true
-            }
+              silent: true,
+            },
           },
           // sourceMap always required on loaders preceding resolve-url-loader
           { loader: 'postcss-loader', options: { sourceMap: true } },
           { loader: 'sass-loader', options: { sourceMap: true } },
-          { loader: 'import-glob-loader2', options: { sourceMap: true } }
-        ]
+          { loader: 'import-glob-loader2', options: { sourceMap: true } },
+        ],
       },
 
       // Fonts and images – Copy files to build folder
       {
         test: /\.(ico|gif|png|jpe?g|svg|webp|woff2?)$/,
-        type: 'asset/resource'
+        type: 'asset/resource',
       },
 
       // Vue template
@@ -167,36 +167,39 @@ module.exports = {
             loader: 'vue-svg-inline-loader',
             options: {
               svgo: {
-                plugins: [{ mergePaths: false }, { removeViewBox: false }]
-              }
-            }
-          }
-        ]
-      }
-    ]
+                plugins: [{ mergePaths: false }, { removeViewBox: false }],
+              },
+            },
+          },
+        ],
+      },
+    ],
   },
 
   devServer: {
     compress: true,
     host: localDomain,
-    https: isUsingHTTPS && secureLocalDomain,
+    server: {
+      type: isUsingHTTPS && secureLocalDomain ? 'https' : 'http',
+      options: secureLocalDomain,
+    },
     port: 8080,
     client: {
       overlay: {
         warnings: false,
-        errors: true
-      }
+        errors: true,
+      },
     },
     devMiddleware: {
       publicPath: PATHS.public,
-      writeToDisk: true
+      writeToDisk: true,
     },
     proxy: {
       '**': {
         target: localURL,
         secure: false,
         headers: {
-          'X-Dev-Server-Proxy': localURL
+          'X-Dev-Server-Proxy': localURL,
         },
         // Modify CSP header to allow for hot-updating
         onProxyRes: (proxyRes) => {
@@ -206,9 +209,9 @@ module.exports = {
               'content-security-policy'
             ].replace('connect-src', `connect-src wss://${localDomain}:8080`);
           }
-        }
-      }
-    }
+        },
+      },
+    },
   },
 
   optimization: {
@@ -224,17 +227,17 @@ module.exports = {
         // Exclude others by adding them within `(?!)` with a `|`
         vendor: {
           name: 'vendor',
-          test: /[\\/]node_modules[\\/](?!whatwg-fetch|core-js)/
+          test: /[\\/]node_modules[\\/](?!whatwg-fetch|core-js)/,
         },
         defaultVendors: false,
-        default: false
-      }
-    }
+        default: false,
+      },
+    },
   },
 
   performance: {
     hints: false,
     maxEntrypointSize: 512000,
-    maxAssetSize: 512000
-  }
+    maxAssetSize: 512000,
+  },
 };

@@ -22,6 +22,20 @@ svg {
   max-width: 100%;
 }
 
+.typography {
+  > :first-child {
+    margin-top: 0;
+  }
+
+  > :last-child {
+    margin-bottom: 0;
+  }
+}
+
+[v-cloak] {
+  display: none;
+}
+
 /*
   This will hide the focus indicator if the element receives focus via the mouse,
   but it will still show up on keyboard focus. From 'focus-visible' polyfill.

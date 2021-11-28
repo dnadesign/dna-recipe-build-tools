@@ -9,7 +9,7 @@
       transition: var(--trs-default);
       margin-left: 5px;
       background-color: var(--link-color);
-      width: 10px;
+      width: 9px;
       height: 10px;
       content: '';
       mask-image: url('../../../static/svg/link-external.svg');
@@ -49,8 +49,8 @@
       margin-left: 5px;
       background-color: currentColor;
       background-color: var(--link-color);
-      width: 14px;
-      height: 13px;
+      width: 9px;
+      height: 10px;
       content: '';
       mask-size: cover;
       mask-image: url('../../../static/svg/link-download.svg');

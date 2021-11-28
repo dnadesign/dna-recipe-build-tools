@@ -15,6 +15,8 @@ Although this provides a lot out of the box, feel free to customise it to fit th
 3. By default this is configured for Vue, if you are using React then move and replace the files from `themes/base/react` otherwise this folder can be deleted
 4. Make appropriate configuration changes to `webpack.env.js`
 5. Run `yarn install` in the folder containing `package.json`
+6. If you are using this within a Silverstripe environment, add code from the _Loading built files_ section to the appropriate place
+7. You should be all set now to run the desired yarn task, see the _Tasks_ section for more info – enjoy!
 
 ## Configuration
 
@@ -57,7 +59,7 @@ These extensions are to provide code linting and formatting, this is to make sur
 | `dbaeumer.vscode-eslint`     | JS linting and fixing       |
 | `editorconfig.editorconfig`  | Consistent spacing in files |
 | `esbenp.prettier-vscode`     | File formatting             |
-| `octref.vetur`               | .vue file support           |
+| `johnsoncodehk.volar`        | .vue file support           |
 | `stylelint.vscode-stylelint` | SCSS linting and fixing     |
 
 ### Recommended
@@ -79,15 +81,14 @@ These extensions are likely to improve your development experience for _js_ and 
 
 It is likely that you will be using this build chain in conjunction with Silverstripe/PHP development, these extensions will greatly enhance your Silverstripe development experience. Note _phpcs_ and _phpcbf_ tools must be installed to take advantage of use the linting and formatting, this can be done by running `composer global require squizlabs/php_codesniffer`
 
-| Extension                               | Description                                          |
-| --------------------------------------- | ---------------------------------------------------- |
-| `adrianhumphreys.silverstripe`          | Silverstripe `.ss` syntax support                    |
-| `bmewburn.vscode-intelephense-client`   | PHP Intellisense                                     |
-| `felixfbecker.php-debug`                | Debug support for PHP with XDebug                    |
-| `mehedidracula.php-namespace-resolver`  | Import and expand PHP namespaces                     |
-| `neilbrayfield.php-docblocker`          | PHP Docblock support                                 |
-| `phproberto.vscode-php-getters-setters` | Create PHP getters and setters from class properties |
-| `valeryanm.vscode-phpsab`               | PHP linting and fixing                               |
+| Extension                              | Description                       |
+| -------------------------------------- | --------------------------------- |
+| `adrianhumphreys.silverstripe`         | Silverstripe `.ss` syntax support |
+| `bmewburn.vscode-intelephense-client`  | PHP Intellisense                  |
+| `felixfbecker.php-debug`               | Debug support for PHP with XDebug |
+| `mehedidracula.php-namespace-resolver` | Import and expand PHP namespaces  |
+| `neilbrayfield.php-docblocker`         | PHP Docblock support              |
+| `valeryanm.vscode-phpsab`              | PHP linting and fixing            |
 
 ## Tasks
 

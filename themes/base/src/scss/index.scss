@@ -1,6 +1,12 @@
 // https://csstools.github.io/sanitize.css/
 @import 'sanitize.css';
 
+@import 'fonts/*';
 @import 'mixins/*';
 @import 'typography/*';
 @import 'layout/*';
+// @import 'pages/*';
+// @import 'components/*';
+
+/* stylelint-disable-next-line scss/at-import-partial-extension-blacklist */
+// @import '../components/**/*.scss';

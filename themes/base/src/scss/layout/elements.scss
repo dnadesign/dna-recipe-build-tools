@@ -1,0 +1,15 @@
+.element {
+  --element-spacing: 20px;
+
+  padding: var(--element-spacing) 0;
+
+  @include media-breakpoint-up(sm) {
+    --element-spacing: 40px;
+  }
+
+  &--full-bleed {
+    & + & {
+      margin-top: calc(var(--element-spacing) * -2);
+    }
+  }
+}
