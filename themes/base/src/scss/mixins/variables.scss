@@ -2,25 +2,29 @@
   // Primary
   --black: #000;
   --white: #fff;
-  --outline-color: var(--theme-primary, var(--hineahuone-primary));
+
+  // Themed colours
+  --theme-primary: #08c;
+
+  --surface-color: var(--white);
 
   // Text
-  --text-color-dark: var(--black);
-  --text-color-light: var(--white);
-  --text-color-disabled: #9d9fa1;
+  --ink-color: var(--black);
+  --ink-color-inverse: var(--white);
+  --ink-color-disabled: #9d9fa1;
 
   // Forms
   --error-color: #ff2600;
 
   // Links
-  --link-color: var(--text-color-dark);
-  --link-color-hover: var(--text-color-light);
+  --link-ink-color: var(--ink-color);
+  --link-ink-color-interact: var(--ink-color-inverse);
 
   // Buttons
-  --button-color: var(--black);
-  --button-color-hover: var(--black);
-  --button-text-color: var(--black);
-  --button-text-color-hover: var(--white);
+  --button-surface-color: var(--theme-primary);
+  --button-surface-color-interact: var(--theme-primary);
+  --button-ink-color: var(--theme-primary);
+  --button-ink-color-interact: var(--white);
 
   // Transitions
   --duration-short: 0.2s;
@@ -34,14 +38,30 @@
   --trs-long: all var(--duration-long) var(--easing-default);
   --trs-default: var(--trs-short);
 
-  --gutter: #{rem(16px)};
-  --safe-gutters: calc(
-    max(env(safe-area-inset-right), var(--gutter)) +
-      max(env(safe-area-inset-left), var(--gutter))
-  );
-  --container-width: calc(1200px + (2 * var(--gutter)));
+  // Containers
+  --gutter: 16px;
+  --safe-gutter-left: max(env(safe-area-inset-left), var(--gutter));
+  --safe-gutter-right: max(env(safe-area-inset-right), var(--gutter));
+  --safe-gutters: calc(var(--safe-gutter-left) + var(--safe-gutter-left));
+  --container-width: 540px;
 
   @include media-breakpoint-up(sm) {
-    --gutter: #{rem(24px)};
+    --gutter: 24px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    --container-width: 1200px;
+  }
+}
+
+.theme {
+  &--light {
+    --theme-primary: #08c;
+  }
+
+  &--dark {
+    --ink-color: var(--white);
+    --surface-color: var(--black);
+    --theme-primary: #058;
   }
 }

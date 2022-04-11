@@ -1,27 +1,29 @@
 .container {
   padding-right: max(env(safe-area-inset-right), var(--gutter));
   padding-left: max(env(safe-area-inset-left), var(--gutter));
-  max-width: var(--container-width);
+  width: 100%;
+  max-width: calc(var(--container-width) + var(--safe-gutters));
+  margin-inline: auto;
+}
+
+.container--full-width {
+  padding-inline: 0;
 }
 
 .container--content {
-  max-width: calc(540px + var(--safe-gutters));
-
   @include media-breakpoint-up(lg) {
-    max-width: calc(800px + var(--safe-gutters));
+    --container-width: 800px;
   }
 }
 
 .container--narrow {
-  max-width: calc(540px + var(--safe-gutters));
-
   @include media-breakpoint-up(lg) {
-    max-width: calc(1000px + var(--safe-gutters));
+    --container-width: 1000px;
   }
 }
 
 .container--form {
   @include media-breakpoint-up(lg) {
-    max-width: calc(600px + var(--safe-gutters));
+    --container-width: 600px;
   }
 }

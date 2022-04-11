@@ -11,6 +11,9 @@ rules:
   max-nesting-depth:
   order/properties-alphabetical-order:
   selector-no-qualifying-type:
+  color-named:
+    - never
+    - severity: warning
   rule-empty-line-before:
     - always
     - ignore:

@@ -1,0 +1,17 @@
+---
+Name: app-theme
+---
+SilverStripe\View\SSViewer:
+  themes:
+    - '$public'
+    - 'base'
+    - '$default'
+
+PageController:
+  extensions:
+   - App\Utilities\WebpackResourceLoader
+
+BenManu\SimpleStyleguide\SimpleStyleguideController:
+  extensions:
+   - App\Extensions\SimpleStyleguideControllerExtension
+   - App\Utilities\WebpackResourceLoader

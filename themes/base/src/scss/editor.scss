@@ -1,4 +1,14 @@
 /* stylelint-disable-next-line selector-max-id */
 #tinymce.mce-content-body {
+  /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
+  @extend .theme--light;
+  box-sizing: content-box;
   padding: 1rem;
 }
+
+@import 'sanitize.css';
+
+@import 'fonts/*';
+@import 'mixins/*';
+@import 'typography/*';
+@import 'layout/*';

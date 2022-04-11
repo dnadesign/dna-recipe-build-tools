@@ -1,7 +1,8 @@
 html {
-  background: var(--white);
+  background: var(--surface-color);
   height: 100%;
   line-height: 1.2;
+  color: var(--ink-color);
   -webkit-font-smoothing: antialiased;
 
   @media (min-resolution: 192dpi) {
@@ -20,6 +21,24 @@ img {
 
 svg {
   max-width: 100%;
+}
+
+picture {
+  display: block;
+}
+
+figure {
+  margin: 0;
+}
+
+// prevent space from sanitize.css
+nav li::before {
+  position: absolute;
+}
+
+// override sanitize.css
+[aria-controls] {
+  cursor: default;
 }
 
 .typography {
@@ -42,4 +61,8 @@ svg {
 */
 .js-focus-visible :focus:not(.focus-visible) {
   outline: none;
+}
+
+.focus-visible {
+  @include outline;
 }

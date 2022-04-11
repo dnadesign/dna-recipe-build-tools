@@ -40,9 +40,14 @@
 }
 
 .sr-only {
-  @include sr-only();
+  @include sr-only;
 }
 
 .sr-only--focusable {
-  @include sr-only-focusable();
+  @include sr-only-focusable;
+}
+
+.skip-link {
+  @include link-highlight;
+  color: var(--ink-color);
 }

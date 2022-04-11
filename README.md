@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This is a collection of tools, configurations and recommendations for setting up a project. It provides build tooling setup for SilverStripe based websites, which includes Vue (or optionally React) and recommended extensions for a productive development experience within the IDE developers use at DNA – [Visual Studio Code](https://code.visualstudio.com) (VS Code).
+This is a collection of tools, configurations and recommendations for setting up a project. It provides build tooling setup for Silverstripe based websites, which includes Vue (or optionally React) and recommended extensions for a productive development experience within the IDE developers use at DNA – [Visual Studio Code](https://code.visualstudio.com) (VS Code).
 
 Note that this boilerplate uses yarn v3 (berry) which handles node modules quite differently than it previously did, please consult the [yarn docs](https://yarnpkg.com) for an overview and explanation of these changes.
 
@@ -15,7 +15,7 @@ Although this provides a lot out of the box, feel free to customise it to fit th
 3. By default this is configured for Vue, if you are using React then move and replace the files from `themes/base/react` otherwise this folder can be deleted
 4. Make appropriate configuration changes to `webpack.env.js`
 5. Run `yarn install` in the folder containing `package.json`
-6. If you are using this within a Silverstripe environment, add code from the _Loading built files_ section to the appropriate place
+6. If you are using this within a Silverstripe environment, integrate or remove code from the _Loading built files_ section
 7. You should be all set now to run the desired yarn task, see the _Tasks_ section for more info – enjoy!
 
 ## Configuration
@@ -85,7 +85,7 @@ It is likely that you will be using this build chain in conjunction with Silvers
 | -------------------------------------- | --------------------------------- |
 | `adrianhumphreys.silverstripe`         | Silverstripe `.ss` syntax support |
 | `bmewburn.vscode-intelephense-client`  | PHP Intellisense                  |
-| `felixfbecker.php-debug`               | Debug support for PHP with XDebug |
+| `xdebug.php-debug`                     | Debug support for PHP with XDebug |
 | `mehedidracula.php-namespace-resolver` | Import and expand PHP namespaces  |
 | `neilbrayfield.php-docblocker`         | PHP Docblock support              |
 | `valeryanm.vscode-phpsab`              | PHP linting and fixing            |
@@ -191,101 +191,4 @@ If intending to use React follow these steps:
 
 ## Loading built files
 
-Below are some PHP functions that automatically includes generated files by parsing the `webpack-assets.json` that webpack outputs (it contains has a list of `.js` and `.css` files generated). This can be helpful because `dev` produces less files than `prod` as it does not perform vendor chunking.
-
-In `PageController.php`
-
-```php
-    public function init()
-    {
-        parent::init();
-
-        Requirements::set_force_js_to_bottom(true);
-        $this->loadBuiltReqs();
-    }
-
-    /**
-     * Get the webpack-assets.json, returns false if not present
-     *
-     * @return array|false
-     */
-    public function getWebpackAssets()
-    {
-        return glob(THEMES_PATH . '/base/dist/webpack-assets.json');
-    }
-
-    /**
-     * Loads a requirement according to it's type
-     *
-     * @return void
-     */
-    private function loadRequirement($type, $fileName)
-    {
-        if (gettype($fileName) === 'array') {
-            $bundle = array_filter($fileName, function ($file) {
-                return strpos($file, '.bundle');
-            });
-            $fileName = array_pop($bundle);
-        }
-        $fileName = ltrim($fileName, '/');
-        $fileName = str_replace('_resources/', '', $fileName);
-        if ($type === 'js') {
-            Requirements::javascript($fileName);
-        } elseif ($type === 'css') {
-            Requirements::css($fileName);
-        }
-    }
-
-    /**
-     * Loads the list of built requirements from webpack 'webpack-assets.json'
-     *
-     * @return void
-     */
-    public function loadBuiltReqs()
-    {
-        $assetsFile = $this->getWebpackAssets();
-
-        if (!$assetsFile) {
-            return;
-        }
-
-        $assets = json_decode(file_get_contents($assetsFile[0]), true);
-
-        // Skip loading these assets since they're loaded through other means
-        $skipAssets = [
-            '', 'editor', 'polyfills', 'components'
-        ];
-
-        foreach ($skipAssets as $asset) {
-            if (array_key_exists($asset, $assets)) {
-                unset($assets[$asset]);
-            }
-        }
-
-        // Load vendor first
-        if (array_key_exists('vendor', $assets)) {
-            foreach ($assets['vendor'] as $type => $fileName) {
-                $this->loadRequirement($type, $fileName);
-            }
-            unset($assets['vendor']);
-        }
-        foreach ($assets as $reqs) {
-            foreach ($reqs as $type => $fileName) {
-                $this->loadRequirement($type, $fileName);
-            }
-        }
-    }
-
-    /**
-     * Returns the favicon.ico url if webpack assets are built
-     *
-     * @return string|false
-     */
-    public function getFavicon($type = 'ico')
-    {
-        if (!$this->getWebpackAssets()) {
-            return false;
-        }
-        return ModuleResourceLoader::singleton()->resolveResource("/_resources/themes/base/dist/static/favicons/favicon.$type");
-    }
-```
+In the `app` folder is a few files which contains utilities specific to Silverstripe to load webpack resources and customise the styleguide module to the boilerplate. Integrate these into your Silverstripe setup, otherwise these can be deleted.

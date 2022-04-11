@@ -26,5 +26,9 @@ figcaption {
     @include media-breakpoint-up(lg) {
       margin-bottom: 0;
     }
+
+    + figcaption {
+      @include image-caption;
+    }
   }
 }

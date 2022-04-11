@@ -1,26 +1,24 @@
 @use 'sass:math';
 
-$highlight--no-underline: inset 0 0 0 0;
-$highlight--underline: inset 0 -1px 0 0;
-$highlight--hover: inset 0 -1.6em 0 0;
-
 @mixin link-highlight($underline: false) {
-  transition: var(--trs-default);
+  --highlight-color: var(--link-highlight);
+  --highlight-no-underline: inset 0 0 0 0;
+  --highlight-underline: inset 0 -1px 0 0;
+  --highlight-interact: inset 0 -1.6em 0 0;
 
   @if $underline {
-    box-shadow: $highlight--underline var(--link-highlight, var(--link-color));
+    box-shadow: var(--highlight-underline) var(--highlight-color);
   } @else {
-    box-shadow: $highlight--no-underline
-      var(--link-highlight, var(--link-color));
+    box-shadow: var(--highlight-no-underline) var(--highlight-color);
   }
+  transition: var(--trs-default);
   text-decoration: none;
-  color: var(--link-color);
   box-decoration-break: clone;
 
   &:hover,
   &.focus-visible {
-    box-shadow: $highlight--hover var(--link-highlight, var(--link-color));
-    color: var(--link-color-hover);
+    box-shadow: var(--highlight-interact) var(--highlight-color);
+    color: var(--link-color-interact);
   }
 
   @media print {
@@ -36,7 +34,6 @@ $highlight--hover: inset 0 -1.6em 0 0;
   appearance: none;
   border: 0;
   background: none;
-  cursor: pointer;
   padding: 0;
 }
 
@@ -47,6 +44,14 @@ $highlight--hover: inset 0 -1.6em 0 0;
   -webkit-box-orient: vertical;
   /* stylelint-enable */
   overflow: hidden;
+}
+
+@mixin mask-image-svg($icon, $color: none) {
+  mask-image: svg-load('#{$icon}');
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: cover;
+  background-color: $color;
 }
 
 @mixin background-image-svg($icon, $fill: none, $stroke: none) {
@@ -61,6 +66,7 @@ $highlight--hover: inset 0 -1.6em 0 0;
 }
 
 @mixin outline {
-  outline: var(--outline-color) solid 2px;
+  --outline-color: var(--theme-primary, var(--black));
+  outline: var(--outline-color) solid 1.5px;
   outline-offset: 2px;
 }

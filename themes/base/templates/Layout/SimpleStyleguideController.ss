@@ -1,17 +1,29 @@
 <header>
-    <div class="container container--content">
-        $Breadcrumbs
-        <div class="typography">
-            <h1>H1 Mobile – New code of lorem ipsum dālor sit amet consectetur.</h1>
-            <p class="text-intro">Intro — lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna aliqua. Vvelit esse cillum dolore eu fugiat nulla pariatur. Quisque ut dolor gravida, placerat libero vel, euismod.</p>
-        </div>
+    <div class="container container--form">
+        <form class="form">
+            <fieldset class="field userformsoptionset theme-switcher">
+                <legend class="legend">Switch themes</legend>
+                <div>
+                    <input type="radio" class="input radio" id="gns" name="theme" value="light" checked>
+                    <label for="light">Light</label>
+                </div>
+                <div>
+                    <input type="radio" class="input radio" id="hazards-risks" name="theme" value="dark">
+                    <label for="dark">Natural Hazards & Risks</label>
+                </div>
+            </fieldset>
+        </form>
     </div>
 </header>
 <div class="container container--content">
     <div class="typography">
+        <h1>H1 title – An in depth paper lorem ipsum dālor sit amet consectetur.</h1>
+        <p><strong>Paragraph text</strong> – Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Consectetur adipiscing elit pellentesque habitant morbi tristique senectus. Mauris ultrices eros in cursus turpis. Pretium quam vulputate dignissim suspendisse in est ante. Iaculis at erat pellentesque adipiscing commodo elit. Rhoncus aenean vel elit scelerisque mauris pellentesque pulvinar. </p>
+
         <h2>H2 – Content heading</h2>
-        <p><strong>Body Text</strong> – lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        <p><em>Magna pars studiorum</em>, prodita quaerimus. Tityre, tu patulae recubans sub tegmine fagi dolor. Salutantibus vitae elit libero, a pharetra augue.</p>
+        <p>Tortor aliquam nulla facilisi cras fermentum odio eu. Arcu bibendum at varius vel pharetra vel turpis nunc eget. Nisl suscipit adipiscing bibendum est ultricies integer. Urna et pharetra pharetra massa massa ultricies mi quis hendrerit. Eget duis at tellus at urna condimentum mattis pellentesque id. Nunc congue nisi vitae suscipit tellus mauris a diam maecenas.</p>
+
+        <p>Maecenas pharetra convallis posuere morbi leo urna. Vitae tortor condimentum lacinia quis vel. Adipiscing elit pellentesque habitant morbi tristique senectus et. Aliquet nibh praesent tristique magna sit amet purus. Quisque id diam inline text link pulvinar etiam non. Id diam maecenas ultricies mi eget mauris pharetra et ultrices. Feugiat sed lectus vestibulum mattis ullamcorper velit. Aliquam ultrices sagittis orci a scelerisque purus semper.</p>
 
         <ol>
             <li>
@@ -49,9 +61,16 @@
         <h6>H6 – Content heading</h6>
         <p>Body Text – lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 
-        <blockquote>
-            <p>Blockquote – Consectetur elit morbi tristique senectus ultrices eros in cursus turpis ec feugiat in urna nec bibendum at varius vel pharetra ea commodo consequat.</p>
-        </blockquote>
+        <figure class="blockquote">
+            <blockquote class="blockquote__quote">
+                <p>Blockquote – “This is definitely a great piece of work that is going to be very useful for informing further work in this area.” </p>
+            </blockquote>
+            <figcaption class="blockquote__attribution">
+                <span class="blockquote__author">John Caldwell</span>
+                <span class="blockquote__author-title">Senior Scientist for Science and Strategy</span>
+                <span class="blockquote__company">Waikato Regional Council</span>
+            </figcaption>
+        </figure>
 
         <p>Body Text – lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate.</p>
 

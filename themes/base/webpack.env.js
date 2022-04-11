@@ -15,7 +15,7 @@ const PATHS = {
   dist: './dist', // where generated files are stored
   static: './static', // where static files are stored
   templates: './templates', // where template files are stored
-  public: `/_resources/themes/${theme}/dist/` // where files are served from
+  public: `/_resources/themes/${theme}/dist/`, // where files are served from
 };
 module.exports.PATHS = PATHS;
 
@@ -36,8 +36,8 @@ module.exports.localDomain = localDomain;
 module.exports.localURL = localURL;
 
 const secureLocalDomain = {
-  cacert: process.env.WEBPACK_SSL_CA,
+  ca: process.env.WEBPACK_SSL_CA,
   cert: process.env.WEBPACK_SSL_CERT,
-  key: process.env.WEBPACK_SSL_KEY
+  key: process.env.WEBPACK_SSL_KEY,
 };
 module.exports.secureLocalDomain = secureLocalDomain;

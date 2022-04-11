@@ -7,7 +7,7 @@
   padding-top: 15px;
   padding-bottom: 10px;
   text-decoration: none;
-  color: var(--button-text-color);
+  color: var(--button-ink-color);
   font-size: rem(16px);
   font-weight: 700;
 
@@ -26,50 +26,103 @@
 }
 
 @mixin button--primary {
-  border: 2px solid var(--button-color);
+  border: 2px solid var(--button-surface-color);
   padding-right: 30px;
   padding-left: 30px;
 
   &:hover,
   &.focus-visible {
-    background-color: var(--button-color-hover);
-    color: var(--button-text-color-hover);
+    background-color: var(--button-surface-color-interact);
+    color: var(--button-ink-color-interact);
   }
 }
 
 @mixin button--secondary {
-  box-shadow: inset 0 -2px var(--button-color);
+  box-shadow: inset 0 -2px var(--button-surface-color);
 
   &:hover,
   &.focus-visible {
-    box-shadow: inset 0 calc((1em + (15px * 2)) * -1) var(--button-color-hover);
-    color: var(--button-text-color-hover);
+    box-shadow: inset 0 calc((1em + (15px * 2)) * -1)
+      var(--button-surface-color-interact);
+    color: var(--button-ink-color-interact);
   }
 }
 
 @mixin button--inverse {
-  --button-color: var(--white);
-  --button-color-hover: var(--white);
-  --button-text-color: var(--white);
-  --button-text-color-hover: var(--black);
+  --button-surface-color: var(--white);
+  --button-surface-color-interact: var(--white);
+  --button-ink-color: var(--white);
+  --button-ink-color-interact: var(--black);
 }
 
-@mixin button--icon {
-  box-sizing: content-box;
-  transition: var(--trs-default);
-  background-color: var(--button-color);
-  background-position: center;
-  background-repeat: no-repeat;
-  cursor: pointer;
-  padding: 10px;
+@mixin button--icon($icon, $icon-adjustments: null) {
+  --default-button-icon-size: 14px;
+  --default-button-padding-size: 7px;
+  @include reset-button;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+
+  @include media-breakpoint-up(sm) {
+    --default-button-icon-size: 18px;
+    --default-button-padding-size: 9px;
+  }
+
+  &::before {
+    position: absolute;
+    transition: var(--trs-default);
+    z-index: 2;
+    margin: var(--button-padding-size, var(--default-button-padding-size));
+    background-color: var(--button-surface-color);
+    width: var(--button-icon-size, var(--default-button-icon-size));
+    height: var(--button-icon-size, var(--default-button-icon-size));
+    content: '';
+    @if ($icon-adjustments) {
+      mask-image: svg-load('#{$icon}.svg', $icon-adjustments);
+    } @else {
+      mask-image: svg-load('#{$icon}.svg');
+    }
+    mask-position: center center;
+    mask-size: contain;
+    mask-repeat: no-repeat;
+  }
+
+  &::after {
+    position: relative;
+    transform: scale(0.8);
+    transition: var(--trs-default);
+    z-index: 1;
+    border-radius: 50%;
+    width: calc(
+      var(--button-icon-size, var(--default-button-icon-size)) +
+        (var(--button-padding-size, var(--default-button-padding-size)) * 2)
+    );
+    height: calc(
+      var(--button-icon-size, var(--default-button-icon-size)) +
+        (var(--button-padding-size, var(--default-button-padding-size)) * 2)
+    );
+    content: '';
+  }
 
   &:hover,
   &.focus-visible {
-    background-color: var(--button-color-hover);
+    &::before {
+      background-color: var(--button-ink-color-interact);
+    }
+
+    &::after {
+      transform: scale(1);
+      background-color: var(--button-surface-color-interact);
+    }
   }
 
-  &:focus:not(.focus-visible) {
+  &.focus-visible {
     outline: none;
+
+    &::after {
+      @include outline;
+    }
   }
 }
 
@@ -86,9 +139,5 @@
 
   &--inverse {
     @include button--inverse;
-  }
-
-  &--icon {
-    @include button--icon;
   }
 }

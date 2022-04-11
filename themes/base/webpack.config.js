@@ -61,7 +61,6 @@ module.exports = {
 
     // Removes/cleans build folders and unused assets when rebuilding.
     new CleanWebpackPlugin({
-      cleanStaleWebpackAssets: false,
       cleanOnceBeforeBuildPatterns: ['**/*', '!webpack-assets.json'],
     }),
 
@@ -233,6 +232,10 @@ module.exports = {
         default: false,
       },
     },
+  },
+
+  watchOptions: {
+    aggregateTimeout: 200,
   },
 
   performance: {

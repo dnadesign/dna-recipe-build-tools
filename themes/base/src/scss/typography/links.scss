@@ -1,14 +1,13 @@
 @mixin typography-a {
   @include link-highlight(true);
-  padding-top: 0.25em;
-  padding-bottom: 0.125em;
+  color: var(--link-ink-color);
 
   &[href^='http'] {
     &::after {
       display: inline-block;
       transition: var(--trs-default);
       margin-left: 5px;
-      background-color: var(--link-color);
+      background-color: var(--link-ink-color);
       width: 9px;
       height: 10px;
       content: '';
@@ -27,7 +26,7 @@
     &:hover,
     &.focus-visible {
       &::after {
-        background-color: var(--link-color-hover);
+        background-color: var(--link-ink-color-interact);
       }
     }
   }
@@ -39,16 +38,16 @@
 
   &-name {
     transition: var(--trs-default);
-    box-shadow: $highlight--underline var(--link-color);
+    box-shadow: var(--highlight-underline) var(--link-ink-color);
     text-decoration: none;
-    color: var(--link-color);
+    color: var(--link-ink-color);
 
     &::after {
       display: inline-block;
       transition: var(--trs-default);
       margin-left: 5px;
       background-color: currentColor;
-      background-color: var(--link-color);
+      background-color: var(--link-ink-color);
       width: 9px;
       height: 10px;
       content: '';
@@ -59,11 +58,11 @@
 
   &:hover .link__download-name,
   &.focus-visible .link__download-name {
-    box-shadow: $highlight--hover var(--link-color);
-    color: var(--link-color-hover);
+    box-shadow: var(--highlight-interact) var(--link-ink-color);
+    color: var(--link-ink-color-interact);
 
     &::after {
-      background-color: var(--link-color-hover);
+      background-color: var(--link-ink-color-interact);
     }
   }
 
@@ -72,6 +71,28 @@
     letter-spacing: rem(0.5px);
     font-size: rem(11px);
     font-weight: 300;
+  }
+}
+
+.edit-link {
+  position: absolute;
+  right: 0;
+  transition: var(--trs-default);
+  opacity: 0.5;
+  z-index: 100;
+  background-color: var(--theme-primary);
+  padding: 3px 5px;
+  text-decoration: none;
+  color: var(--white);
+  font-size: rem(12px);
+
+  @media print {
+    display: none;
+  }
+
+  &:hover,
+  &.focus-visible {
+    opacity: 1;
   }
 }
 
