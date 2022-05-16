@@ -14,7 +14,7 @@ class WebpackResourceLoader extends Extension
      *
      * @var string
      */
-    private static $theme = 'takina';
+    private static $theme = 'base';
 
     public function onAfterInit()
     {

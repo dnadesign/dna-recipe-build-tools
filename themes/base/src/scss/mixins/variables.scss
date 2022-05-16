@@ -1,60 +1,5 @@
-:root {
-  // Primary
-  --black: #000;
-  --white: #fff;
-
-  // Themed colours
-  --theme-primary: #08c;
-
-  --surface-color: var(--white);
-
-  // Text
-  --ink-color: var(--black);
-  --ink-color-inverse: var(--white);
-  --ink-color-disabled: #9d9fa1;
-
-  // Forms
-  --error-color: #ff2600;
-
-  // Links
-  --link-ink-color: var(--ink-color);
-  --link-ink-color-interact: var(--ink-color-inverse);
-
-  // Buttons
-  --button-surface-color: var(--theme-primary);
-  --button-surface-color-interact: var(--theme-primary);
-  --button-ink-color: var(--theme-primary);
-  --button-ink-color-interact: var(--white);
-
-  // Transitions
-  --duration-short: 0.2s;
-  --duration-medium: 0.3s;
-  --duration-long: 0.5s;
-
-  --easing-default: cubic-bezier(0.77, 0, 0.175, 1); // Ease-in-out quatric
-
-  --trs-short: all var(--duration-short) var(--easing-default);
-  --trs-medium: all var(--duration-medium) var(--easing-default);
-  --trs-long: all var(--duration-long) var(--easing-default);
-  --trs-default: var(--trs-short);
-
-  // Containers
-  --gutter: 16px;
-  --safe-gutter-left: max(env(safe-area-inset-left), var(--gutter));
-  --safe-gutter-right: max(env(safe-area-inset-right), var(--gutter));
-  --safe-gutters: calc(var(--safe-gutter-left) + var(--safe-gutter-left));
-  --container-width: 540px;
-
-  @include media-breakpoint-up(sm) {
-    --gutter: 24px;
-  }
-
-  @include media-breakpoint-up(lg) {
-    --container-width: 1200px;
-  }
-}
-
 .theme {
+  // It is important that alternate themes are defined first
   &--light {
     --theme-primary: #08c;
   }
@@ -63,5 +8,64 @@
     --ink-color: var(--white);
     --surface-color: var(--black);
     --theme-primary: #058;
+  }
+
+  // Base Theme
+  :root,
+  & {
+    // Basic colours
+    --black: #000;
+    --white: #fff;
+
+    // Themed colours
+    --theme-primary: #08c;
+
+    // Surface
+    --surface-color: var(--white);
+
+    // Text
+    --ink-color: var(--black);
+    --ink-color-inverse: var(--white);
+    --ink-color-disabled: #9d9fa1;
+
+    // Forms
+    --error-color: #ff2600;
+
+    // Links
+    --link-ink-color: var(--ink-color);
+    --link-ink-color-interact: var(--ink-color-inverse);
+
+    // Buttons
+    --button-surface-color: var(--theme-primary);
+    --button-surface-color-interact: var(--theme-primary);
+    --button-ink-color: var(--theme-primary);
+    --button-ink-color-interact: var(--white);
+
+    // Transitions
+    --duration-short: 0.2s;
+    --duration-medium: 0.3s;
+    --duration-long: 0.5s;
+
+    --easing-default: cubic-bezier(0.77, 0, 0.175, 1); // Ease-in-out quatric
+
+    --trs-short: all var(--duration-short) var(--easing-default);
+    --trs-medium: all var(--duration-medium) var(--easing-default);
+    --trs-long: all var(--duration-long) var(--easing-default);
+    --trs-default: var(--trs-short);
+
+    // Containers
+    --gutter: 16px;
+    --safe-gutter-left: max(env(safe-area-inset-left), var(--gutter));
+    --safe-gutter-right: max(env(safe-area-inset-right), var(--gutter));
+    --safe-gutters: calc(var(--safe-gutter-left) + var(--safe-gutter-left));
+    --container-width: 540px;
+
+    @include media-breakpoint-up(sm) {
+      --gutter: 24px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      --container-width: 1200px;
+    }
   }
 }
