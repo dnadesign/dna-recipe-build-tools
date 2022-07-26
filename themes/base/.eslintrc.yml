@@ -38,5 +38,6 @@ rules:
   no-unused-vars: warn
   simple-import-sort/exports: warn
   simple-import-sort/imports: warn
+  vue/no-multiple-template-root: 'off'
 settings:
   import/resolver: webpack

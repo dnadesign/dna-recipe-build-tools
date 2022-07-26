@@ -1,16 +1,14 @@
 module.exports = {
   sourceType: 'unambiguous',
-  presets: [
+  presets: [['@babel/preset-env'], 'airbnb'],
+  plugins: [
     [
-      '@babel/preset-env',
+      'polyfill-corejs3',
       {
-        useBuiltIns: 'entry',
-        corejs: { version: 3 },
+        method: 'usage-global',
+        version: '3.24',
       },
     ],
-    'airbnb',
-  ],
-  plugins: [
     ['@babel/plugin-proposal-class-properties', { loose: true }],
     ['@babel/plugin-proposal-decorators', { legacy: true }],
     '@babel/plugin-proposal-nullish-coalescing-operator',

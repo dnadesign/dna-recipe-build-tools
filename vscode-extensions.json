@@ -18,6 +18,6 @@
     "orta.vscode-jest",
     "streetsidesoftware.code-spell-checker",
     "stylelint.vscode-stylelint",
-    "valeryanm.vscode-phpsab"
+    "wongjn.php-sniffer"
   ]
 }

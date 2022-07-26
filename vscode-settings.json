@@ -16,7 +16,7 @@
     "editor.formatOnSave": true
   },
   "[php]": {
-    "editor.defaultFormatter": "valeryanm.vscode-phpsab",
+    "editor.defaultFormatter": "wongjn.php-sniffer",
     "editor.formatOnSave": true
   },
   "[scss]": {
@@ -38,8 +38,8 @@
   "php-docblocker.useShortNames": true,
   "php.suggest.basic": false,
   "php.validate.enable": false,
-  "phpsab.snifferMode": "onType",
-  "phpsab.standard": "PSR2",
+  "phpSniffer.autoDetect": true,
+  "phpSniffer.run": "onType",
   "prettier.prettierPath": "themes/base/.yarn/sdks/prettier/index.js",
   "scss.validate": false,
   "search.exclude": {

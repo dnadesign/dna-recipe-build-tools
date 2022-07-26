@@ -107,6 +107,8 @@ class WebpackResourceLoader extends Extension
         $favicon = ThemeResourceLoader::inst()
             ->findThemedResource("/dist/static/favicons/favicon.$type");
 
-        return Util::joinPaths('/', RESOURCES_DIR, $favicon);
+        return $favicon
+            ? Util::joinPaths('/', RESOURCES_DIR, $favicon)
+            : null;
     }
 }
