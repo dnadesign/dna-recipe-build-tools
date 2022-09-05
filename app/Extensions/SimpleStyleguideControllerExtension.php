@@ -9,6 +9,11 @@ use SilverStripe\View\ArrayData;
 
 class SimpleStyleguideControllerExtension extends Extension
 {
+    public function onBeforeInit()
+    {
+        \PageController::create()->loadBuiltReqs();
+    }
+
     public function updateForm($form)
     {
         $form->addExtraClass('form');

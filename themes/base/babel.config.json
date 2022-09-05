@@ -1,0 +1,27 @@
+{
+  "presets": [["@babel/preset-env"], "airbnb"],
+  "plugins": [
+    [
+      "polyfill-corejs3",
+      {
+        "method": "usage-global",
+        "version": "3.25"
+      }
+    ],
+    "@babel/plugin-transform-runtime",
+    "react-html-attrs"
+  ],
+  "env": {
+    "dev": { "plugins": [] },
+    "test": {
+      "plugins": [
+        [
+          "__coverage__",
+          {
+            "ignore": "*.test.*"
+          }
+        ]
+      ]
+    }
+  }
+}

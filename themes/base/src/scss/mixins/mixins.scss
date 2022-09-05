@@ -1,24 +1,28 @@
 @use 'sass:math';
 
-@mixin link-highlight($underline: false) {
-  --highlight-color: var(--link-highlight);
+:root,
+.theme {
+  --highlight-color: var(--link-highlight-color);
   --highlight-no-underline: inset 0 0 0 0;
-  --highlight-underline: inset 0 -1px 0 0;
-  --highlight-interact: inset 0 -1.6em 0 0;
+  --highlight-underline: inset 0 -2px 0 0;
+  --highlight-interact: inset 0 -1.5em 0 0;
+}
 
+@mixin link-highlight($underline: false) {
   @if $underline {
     box-shadow: var(--highlight-underline) var(--highlight-color);
   } @else {
     box-shadow: var(--highlight-no-underline) var(--highlight-color);
   }
   transition: var(--trs-default);
+  padding-bottom: 3px;
   text-decoration: none;
   box-decoration-break: clone;
 
   &:hover,
   &.focus-visible {
     box-shadow: var(--highlight-interact) var(--highlight-color);
-    color: var(--link-color-interact);
+    color: var(--link-ink-color-interact);
   }
 
   @media print {
@@ -66,7 +70,20 @@
 }
 
 @mixin outline {
-  --outline-color: var(--theme-primary, var(--black));
+  --outline-color: var(--default-outline-color);
   outline: var(--outline-color) solid 1.5px;
   outline-offset: 2px;
+}
+
+@mixin no-scrollbar {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
 }

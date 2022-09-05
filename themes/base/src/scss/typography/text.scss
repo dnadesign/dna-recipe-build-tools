@@ -1,4 +1,5 @@
 @mixin typography-p {
+  margin-block: var(--paragraph-spacing);
   line-height: 1.5;
   font-size: rem(16px);
 }
@@ -17,13 +18,88 @@
   border-bottom: 1px solid currentColor;
 }
 
-@mixin typography-blockquote {
-  position: relative;
-  margin: 40px 0;
+@mixin typography-list {
+  @include typography-p;
+  margin-inline: 0;
   padding: 0;
+  list-style: none;
+  list-style-position: inside;
 
-  @include media-breakpoint-up(sm) {
-    margin: 70px 0 50px;
+  ul,
+  ol {
+    margin-block: 5px;
+  }
+}
+
+@mixin typography-li {
+  margin-top: 0;
+  padding-left: var(--list-indent);
+  font-size: inherit;
+
+  &::before {
+    display: inline-block;
+    margin-left: calc(var(--list-indent) * -1);
+    width: var(--list-indent);
+    text-align: left;
+  }
+
+  + li {
+    margin-block: 5px;
+  }
+}
+
+@mixin typography-ul {
+  @include typography-list;
+
+  // Level 1
+  li::before {
+    content: '•';
+  }
+
+  ul {
+    // Level 2
+    li::before {
+      content: '—';
+    }
+  }
+}
+
+@mixin typography-ol {
+  @include typography-list;
+
+  ::marker {
+    text-align: left;
+  }
+
+  // Level 1
+  li {
+    counter-increment: level1;
+
+    &::before {
+      content: counter(level1, decimal) '.';
+    }
+  }
+
+  ol {
+    // Level 2
+    li {
+      counter-increment: level2;
+
+      &::before {
+        content: counter(level2, lower-alpha) '.';
+      }
+    }
+
+    ol {
+      // Level 3
+      li {
+        counter-increment: level3;
+
+        &::before {
+          content: counter(level3, lower-roman) '.';
+        }
+      }
+    }
   }
 }
 
@@ -46,7 +122,15 @@
     @include typography-hr;
   }
 
-  blockquote {
-    @include typography-blockquote;
+  li {
+    @include typography-li;
+  }
+
+  ul {
+    @include typography-ul;
+  }
+
+  ol {
+    @include typography-ol;
   }
 }

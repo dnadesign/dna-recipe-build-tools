@@ -14,12 +14,3 @@
 *.hot-update.*
 *.map
 silverstripe.log
-
-# Yarn
-themes/base/.yarn/*
-!themes/base/.yarn/releases
-!themes/base/.yarn/plugins
-!themes/base/.yarn/sdks
-!themes/base/.yarn/versions
-.pnp.*
-yarn-error.log

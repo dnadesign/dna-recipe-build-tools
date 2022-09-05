@@ -3,6 +3,9 @@
 
 @import 'fonts/*';
 @import 'mixins/*';
+
+@import 'variables';
+
 @import 'typography/*';
 @import 'layout/*';
 // @import 'pages/*';
@@ -10,4 +13,4 @@
 // @import 'elements/*';
 
 /* stylelint-disable-next-line scss/at-import-partial-extension-blacklist */
-// @import '../components/**/*.scss';
+@import '../components/**/*.scss';

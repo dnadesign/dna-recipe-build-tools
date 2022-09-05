@@ -10,7 +10,7 @@ Although this provides a lot out of the box, feel free to customise it to fit th
 
 ## Setup
 
-1. Make sure you have _nvm_ and _yarn_ installed
+1. Make sure you have installed _nvm_ (or better yet [fnm](https://github.com/Schniz/fnm))
 2. Install required development extensions (see the _Development Extensions_ section)
 3. By default this is configured for Vue, if you are using React then move and replace the files from `themes/base/react` otherwise this folder can be deleted
 4. Make appropriate configuration changes to `webpack.env.js`
@@ -54,28 +54,32 @@ If you do not use VS Code it is recommended that you use equivalent extensions/c
 
 These extensions are to provide code linting and formatting, this is to make sure that we are avoiding common pitfalls and writing code the same style. These extensions help us to fix errors before triggering the build task, as you will be warned about errors while typing and files will be fixed on save.
 
-| Extension                    | Description                 |
-| ---------------------------- | --------------------------- |
-| `dbaeumer.vscode-eslint`     | JS linting and fixing       |
-| `editorconfig.editorconfig`  | Consistent spacing in files |
-| `esbenp.prettier-vscode`     | File formatting             |
-| `johnsoncodehk.volar`        | .vue file support           |
-| `stylelint.vscode-stylelint` | SCSS linting and fixing     |
+| Extension                                  | Description                        |
+| ------------------------------------------ | ---------------------------------- |
+| `dbaeumer.vscode-eslint`                   | JS linting and fixing              |
+| `editorconfig.editorconfig`                | Consistent spacing in files        |
+| `esbenp.prettier-vscode`                   | File formatting                    |
+| `stylelint.vscode-stylelint`               | SCSS linting and fixing            |
+| `Vue.volar`                                | .vue file support                  |
+| `snyk-security.snyk-vulnerability-scanner` | Code and package security scanning |
 
 ### Recommended
 
 These extensions are likely to improve your development experience for _js_ and _scss_
 
-| Extension                               | Description                 |
-| --------------------------------------- | --------------------------- |
-| `arcanis.vscode-zipfs`                  | Handle yarn 2 zips          |
-| `christian-kohler.npm-intellisense`     | JS import suggestions       |
-| `christian-kohler.path-intellisense`    | File path suggestions       |
-| `mrmlnc.vscode-scss`                    | SCSS Intellisense           |
-| `oouo-diogo-perdigao.docthis`           | Generate JSDoc              |
-| `orta.vscode-jest`                      | Jest Integration            |
-| `streetsidesoftware.code-spell-checker` | Spellchecker                |
-| `drknoxy.eslint-disable-snippets`       | Snippets for eslint-disable |
+| Extension                               | Description                      |
+| --------------------------------------- | -------------------------------- |
+| `arcanis.vscode-zipfs`                  | Handle yarn 2 zips               |
+| `christian-kohler.path-intellisense`    | File path suggestions            |
+| `drknoxy.eslint-disable-snippets`       | Snippets for eslint-disable      |
+| `jock.svg`                              | SVG intellisense and preview     |
+| `mariusschulz.yarn-lock-syntax`         | `yarn.lock` syntax               |
+| `orta.vscode-jest`                      | Jest Integration                 |
+| `pflannery.vscode-versionlens`          | Shows versions in `package.json` |
+| `SomewhatStationery.some-sass`          | SCSS Intellisense                |
+| `streetsidesoftware.code-spell-checker` | Spellchecker                     |
+| `vunguyentuan.vscode-css-variables`     | CSS Variable intellisense        |
+| `WilliamRagstad.wr-docthis`             | Generate JSDoc                   |
 
 ### Silverstripe/PHP
 
@@ -83,12 +87,14 @@ It is likely that you will be using this build chain in conjunction with Silvers
 
 | Extension                              | Description                       |
 | -------------------------------------- | --------------------------------- |
-| `adrianhumphreys.silverstripe`         | Silverstripe `.ss` syntax support |
 | `bmewburn.vscode-intelephense-client`  | PHP Intellisense                  |
-| `xdebug.php-debug`                     | Debug support for PHP with XDebug |
+| `ikappas.composer`                     | Composer file intellisense        |
 | `mehedidracula.php-namespace-resolver` | Import and expand PHP namespaces  |
+| `mikestead.dotenv`                     | `.env` syntax                     |
 | `neilbrayfield.php-docblocker`         | PHP Docblock support              |
+| `OldStarchy.silverstripe-classic`      | Silverstripe `.ss` syntax         |
 | `valeryanm.vscode-phpsab`              | PHP linting and fixing            |
+| `xdebug.php-debug`                     | Debug support for PHP with XDebug |
 
 ## Tasks
 
@@ -104,22 +110,20 @@ To run a task run `yarn <task-name>`
 
 ## Javascript
 
--   [babel](https://babeljs.io) transpiles the js (see `.babelrc`) and allows us to use newer syntax
-    -   `@babel/plugin-proposal-class-properties` and `@babel/plugin-proposal-decorators` allow us to use [js decorators](https://github.com/tc39/proposal-decorators)
-    -   [@babel/plugin-proposal-optional-chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining)
-    -   [@babel/plugin-proposal-nullish-coalescing-operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator)
--   [eslint](https://eslint.org/) lints and fixes the js (see `.eslintrc`)
+-   [babel](https://babeljs.io) transpiles the js (see `babel.config.js`) and allows us to use newer syntax
+-   [core-js](https://github.com/zloirock/core-js) used in conjunction with babel to provide cross browser compatibility
+-   [eslint](https://eslint.org/) lints and fixes the js (see `.eslintrc.yml`)
     -   [airbnb](https://github.com/airbnb/javascript/tree/master/react) as our style guide
     -   [simple-import-sort](https://github.com/lydell/eslint-plugin-simple-import-sort) for automatic import sorting
--   [prettier](https://prettier.io) for overall formatting (see `.prettierrc`)
+-   [prettier](https://prettier.io) for overall formatting (see `.prettierrc.yml`)
 
 ## CSS
 
--   [stylelint](https://stylelint.io/) lints and fixes scss (see `.stylelintrc`)
+-   [stylelint](https://stylelint.io/) lints and fixes scss (see `.stylelintrc.yml`)
     -   [sass-guidelines](https://sass-guidelin.es) as our style guide
     -   [stylelint-concentric-order](https://www.npmjs.com/package/stylelint-config-concentric-order) for automatic property sorting
--   [prettier](https://prettier.io) for overall formatting (see `.prettierrc`)
--   [postcss](https://postcss.org) for CSS Processing (see `postcss.config.js`)
+-   [prettier](https://prettier.io) for overall formatting (see `.prettierrc.yml`)
+-   [postcss](https://postcss.org) for CSS Processing (see `.postcssrc.yml`)
     -   [autoprefixer](https://github.com/postcss/autoprefixer) for adding appropriate prefixes for your supported browsers
     -   [inline-svg](https://github.com/TrySound/postcss-inline-svg) for inlining svg within css files
     -   [normalize](https://github.com/csstools/postcss-normalize) for normalising default styles across browsers

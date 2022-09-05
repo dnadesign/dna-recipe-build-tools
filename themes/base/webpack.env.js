@@ -1,5 +1,7 @@
 // Import settings from `.env` file
-require('dotenv').config();
+import { config as dotenvConfig } from 'dotenv';
+
+dotenvConfig();
 
 // —————————
 // constants
@@ -10,34 +12,29 @@ const theme = 'base';
 const defaultLocalDomain = 'local.dna.co.nz';
 
 // Path definitions
-const PATHS = {
+export const PATHS = {
   src: './src', // where source files are stored
   dist: './dist', // where generated files are stored
   static: './static', // where static files are stored
   templates: './templates', // where template files are stored
   public: `/_resources/themes/${theme}/dist/`, // where files are served from
 };
-module.exports.PATHS = PATHS;
 
 // Feature detection
-const isUsingHTTPS =
+export const isUsingHTTPS =
   'WEBPACK_SSL_ENABLE' in process.env
     ? process.env.WEBPACK_SSL_ENABLE === 'true'
     : false;
-module.exports.isUsingHTTPS = isUsingHTTPS;
 
 // The domain name for local development (Used for webpackDevServer)
-const localDomain =
+export const localDomain =
   'WEBPACK_DOMAIN' in process.env
     ? process.env.WEBPACK_DOMAIN
     : defaultLocalDomain;
-const localURL = `http${isUsingHTTPS ? 's' : ''}://${localDomain}`;
-module.exports.localDomain = localDomain;
-module.exports.localURL = localURL;
+export const localURL = `http${isUsingHTTPS ? 's' : ''}://${localDomain}`;
 
-const secureLocalDomain = {
+export const secureLocalDomain = {
   ca: process.env.WEBPACK_SSL_CA,
   cert: process.env.WEBPACK_SSL_CERT,
   key: process.env.WEBPACK_SSL_KEY,
 };
-module.exports.secureLocalDomain = secureLocalDomain;

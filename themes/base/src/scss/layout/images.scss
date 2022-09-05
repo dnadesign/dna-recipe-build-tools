@@ -1,0 +1,36 @@
+@mixin image-caption {
+  margin-top: 10px;
+  line-height: 1.5;
+  font-size: rem(16px);
+}
+
+:where(img) {
+  max-width: 100%;
+  height: auto;
+}
+
+:where(picture) {
+  display: block;
+}
+
+:where(svg) {
+  max-width: 100%;
+}
+
+:where(figure) {
+  margin: 0;
+}
+
+:where(figcaption) {
+  @include image-caption;
+}
+
+.image {
+  &--with-caption {
+    margin-bottom: 0;
+
+    + figcaption {
+      @include image-caption;
+    }
+  }
+}

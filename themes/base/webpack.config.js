@@ -1,30 +1,35 @@
-const {
-  localURL,
-  localDomain,
+import AssetsPlugin from 'assets-webpack-plugin';
+import babelLoaderExcludeNodeModulesExcept from 'babel-loader-exclude-node-modules-except';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
+import ESLintPlugin from 'eslint-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import path from 'path';
+import PrettierPlugin from 'prettier-webpack-plugin';
+import StylelintPlugin from 'stylelint-webpack-plugin';
+import url from 'url';
+import { VueLoaderPlugin } from 'vue-loader';
+import webpack from 'webpack';
+import WebpackBar from 'webpackbar';
+
+import {
   isUsingHTTPS,
-  secureLocalDomain,
+  localDomain,
+  localURL,
   PATHS,
-} = require('./webpack.env');
+  secureLocalDomain,
+} from './webpack.env.js'; // eslint-disable-line import/extensions
 
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const AssetsPlugin = require('assets-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const ESLintPlugin = require('eslint-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const PrettierPlugin = require('prettier-webpack-plugin');
-const StylelintPlugin = require('stylelint-webpack-plugin');
-const { VueLoaderPlugin } = require('vue-loader');
-const WebpackBar = require('webpackbar');
-const path = require('path');
-const { DefinePlugin } = require('webpack');
-const babelLoaderExcludeNodeModulesExcept = require('babel-loader-exclude-node-modules-except');
+const { DefinePlugin } = webpack;
 
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url)); // eslint-disable-line no-underscore-dangle
 const isProd = process.env.NODE_ENV === 'production';
 const isWatching =
   process.argv.includes('serve') || process.argv.includes('watch');
 
-module.exports = {
+/** @type {import('webpack').Configuration} */
+export default {
   mode: isProd ? 'production' : 'development',
 
   devtool: isProd ? false : 'source-map',
@@ -42,6 +47,11 @@ module.exports = {
     path: path.resolve(__dirname, PATHS.dist),
     filename: isProd ? '[name].[contenthash].bundle.js' : '[name].bundle.js',
     publicPath: PATHS.public,
+    module: true,
+  },
+
+  experiments: {
+    outputModule: true,
   },
 
   resolve: {
@@ -126,7 +136,15 @@ module.exports = {
       {
         test: /\.(jsx?)$/,
         exclude: babelLoaderExcludeNodeModulesExcept(['gmap-vue']),
-        use: [{ loader: 'babel-loader' }, { loader: 'import-glob-loader2' }],
+        use: [
+          {
+            loader: 'babel-loader',
+          },
+          { loader: 'import-glob-loader2' },
+        ],
+        resolve: {
+          fullySpecified: false,
+        },
       },
 
       // Styles – inject CSS into the head with source maps

@@ -56,25 +56,29 @@
 }
 
 @mixin button--icon($icon, $icon-adjustments: null) {
-  --default-button-icon-size: 14px;
-  --default-button-padding-size: 7px;
+  --default-button-icon-size: 15px;
+  --default-button-size: 35px;
   @include reset-button;
   display: flex;
   position: relative;
   align-items: center;
   justify-content: center;
+  transition: var(--trs-default);
+  border-radius: 50%;
+  background-color: var(--button-surface-color);
+  width: var(--button-size, var(--default-button-size));
+  height: var(--button-size, var(--default-button-size));
 
   @include media-breakpoint-up(sm) {
-    --default-button-icon-size: 18px;
-    --default-button-padding-size: 9px;
+    --default-button-size: 45px;
   }
 
   &::before {
     position: absolute;
     transition: var(--trs-default);
     z-index: 2;
-    margin: var(--button-padding-size, var(--default-button-padding-size));
-    background-color: var(--button-surface-color);
+    margin: auto;
+    background-color: var(--button-ink-color);
     width: var(--button-icon-size, var(--default-button-icon-size));
     height: var(--button-icon-size, var(--default-button-icon-size));
     content: '';
@@ -88,40 +92,12 @@
     mask-repeat: no-repeat;
   }
 
-  &::after {
-    position: relative;
-    transform: scale(0.8);
-    transition: var(--trs-default);
-    z-index: 1;
-    border-radius: 50%;
-    width: calc(
-      var(--button-icon-size, var(--default-button-icon-size)) +
-        (var(--button-padding-size, var(--default-button-padding-size)) * 2)
-    );
-    height: calc(
-      var(--button-icon-size, var(--default-button-icon-size)) +
-        (var(--button-padding-size, var(--default-button-padding-size)) * 2)
-    );
-    content: '';
-  }
-
   &:hover,
   &.focus-visible {
+    background-color: var(--button-surface-color-interact);
+
     &::before {
       background-color: var(--button-ink-color-interact);
-    }
-
-    &::after {
-      transform: scale(1);
-      background-color: var(--button-surface-color-interact);
-    }
-  }
-
-  &.focus-visible {
-    outline: none;
-
-    &::after {
-      @include outline;
     }
   }
 }

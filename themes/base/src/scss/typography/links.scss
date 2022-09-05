@@ -11,7 +11,7 @@
       width: 9px;
       height: 10px;
       content: '';
-      mask-image: url('../../../static/svg/link-external.svg');
+      mask-image: svg-load('link-external.svg');
       mask-size: cover;
 
       @media print {
@@ -38,7 +38,7 @@
 
   &-name {
     transition: var(--trs-default);
-    box-shadow: var(--highlight-underline) var(--link-ink-color);
+    box-shadow: var(--highlight-underline) var(--highlight-color);
     text-decoration: none;
     color: var(--link-ink-color);
 
@@ -52,13 +52,13 @@
       height: 10px;
       content: '';
       mask-size: cover;
-      mask-image: url('../../../static/svg/link-download.svg');
+      mask-image: svg-load('link-download.svg');
     }
   }
 
   &:hover .link__download-name,
   &.focus-visible .link__download-name {
-    box-shadow: var(--highlight-interact) var(--link-ink-color);
+    box-shadow: var(--highlight-interact) var(--highlight-color);
     color: var(--link-ink-color-interact);
 
     &::after {
@@ -79,7 +79,7 @@
   right: 0;
   transition: var(--trs-default);
   opacity: 0.5;
-  z-index: 100;
+  z-index: 1000;
   background-color: var(--theme-primary);
   padding: 3px 5px;
   text-decoration: none;

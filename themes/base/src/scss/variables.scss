@@ -28,12 +28,18 @@
     --ink-color-inverse: var(--white);
     --ink-color-disabled: #9d9fa1;
 
+    --heading-spacing-top: 40px;
+    --heading-spacing-bottom: 20px;
+    --paragraph-spacing: 15px;
+    --list-indent: 24px;
+
     // Forms
     --error-color: #ff2600;
 
     // Links
     --link-ink-color: var(--ink-color);
     --link-ink-color-interact: var(--ink-color-inverse);
+    --link-highlight-color: var(--theme-primary);
 
     // Buttons
     --button-surface-color: var(--theme-primary);
@@ -62,6 +68,7 @@
 
     @include media-breakpoint-up(sm) {
       --gutter: 24px;
+      --list-indent: 30px;
     }
 
     @include media-breakpoint-up(lg) {

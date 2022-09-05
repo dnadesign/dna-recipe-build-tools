@@ -40,4 +40,11 @@ rules:
   simple-import-sort/imports: warn
   vue/no-multiple-template-root: 'off'
 settings:
-  import/resolver: webpack
+  import/resolver':
+    alias:
+      map:
+        vue: 'vue/dist/vue.esm-bundler.js'
+      extensions:
+        - '.js'
+        - '.jsx'
+        - '.vue'

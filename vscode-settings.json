@@ -8,12 +8,19 @@
     "activityBarBadge.background": "#fc6500",
     "activityBarBadge.foreground": "#000"
   },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
   "[javascript][vue][json]": {
     "editor.codeActionsOnSave": {
       "source.fixAll.eslint": true
     },
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[php]": {
     "editor.defaultFormatter": "wongjn.php-sniffer",
@@ -26,7 +33,12 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true
   },
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "css.validate": false,
+  "cssVariables.lookupFiles": ["**/themes/**/*.scss"],
+  "eslint.format.enable": true,
   "eslint.lintTask.enable": true,
   "eslint.nodePath": "themes/base/.yarn/sdks",
   "eslint.packageManager": "yarn",
@@ -39,7 +51,6 @@
   "php.suggest.basic": false,
   "php.validate.enable": false,
   "phpSniffer.autoDetect": true,
-  "phpSniffer.run": "onType",
   "prettier.prettierPath": "themes/base/.yarn/sdks/prettier/index.js",
   "scss.validate": false,
   "search.exclude": {

@@ -1,3 +1,13 @@
+@import 'sanitize.css';
+
+@import 'fonts/*';
+@import 'mixins/*';
+
+@import 'variables';
+
+@import 'typography/*';
+@import 'layout/*';
+
 /* stylelint-disable-next-line selector-max-id */
 #tinymce.mce-content-body {
   /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
@@ -5,10 +15,3 @@
   box-sizing: content-box;
   padding: 1rem;
 }
-
-@import 'sanitize.css';
-
-@import 'fonts/*';
-@import 'mixins/*';
-@import 'typography/*';
-@import 'layout/*';

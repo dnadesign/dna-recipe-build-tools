@@ -14,23 +14,6 @@ body {
   min-height: 100vh;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-svg {
-  max-width: 100%;
-}
-
-picture {
-  display: block;
-}
-
-figure {
-  margin: 0;
-}
-
 // prevent space from sanitize.css
 nav li::before {
   position: absolute;

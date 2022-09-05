@@ -1,24 +1,36 @@
 @mixin typography-h1 {
+  margin-top: var(--heading-spacing-top);
+  margin-bottom: var(--heading-spacing-bottom);
   font-size: rem(30px);
 }
 
 @mixin typography-h2 {
+  margin-top: var(--heading-spacing-top);
+  margin-bottom: var(--heading-spacing-bottom);
   font-size: rem(25px);
 }
 
 @mixin typography-h3 {
+  margin-top: var(--heading-spacing-top);
+  margin-bottom: var(--heading-spacing-bottom);
   font-size: rem(20px);
 }
 
 @mixin typography-h4 {
+  margin-top: var(--heading-spacing-top);
+  margin-bottom: var(--heading-spacing-bottom);
   font-size: rem(18px);
 }
 
 @mixin typography-h5 {
+  margin-top: var(--heading-spacing-top);
+  margin-bottom: var(--heading-spacing-bottom);
   font-size: rem(16px);
 }
 
 @mixin typography-h6 {
+  margin-top: var(--heading-spacing-top);
+  margin-bottom: var(--heading-spacing-bottom);
   font-size: rem(14px);
 }
 
